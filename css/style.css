@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css?family=Raleway:400,400i,600,600i,700,700i,800,800i");
-@import url("https://fonts.googleapis.com/css?family=Bree+Serif:400,400i,600,600i,700,700i,800,800i");
+@import url("https://fonts.googleapis.com/css?family=Arsenal:400,400i,600,600i,700,700i,800,800i");
+@import url("https://fonts.googleapis.com/css?family=Lato:400,400i,600,600i,700,700i,800,800i");
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css");
 @import url("/css/academicons.min.css");
 @import url("https://fonts.googleapis.com/css?family={{ site.data.settings.font_settings.body_font | replace: ' ', '+' }}:400,400i,600,600i,700,700i,800,800i");
@@ -470,7 +470,7 @@ html, body {
 
 body {
   background: #fcfbf8;
-  font-family: "Raleway", sans-serif;
+  font-family: "Arsenal", sans-serif;
   font-weight: 400;
   font-style: normal;
   line-height: 1;
@@ -478,7 +478,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Bree Serif", serif;
+  font-family: "Lato", sans serif;
   color: #2A2F36;
 }
 h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child {
@@ -633,7 +633,7 @@ ul, ol {
 
 blockquote {
   margin-top: 15px;
-  font-family: "Bree Serif", serif;
+  font-family: "Lato", sans serif;
   font-size: 16px;
   font-weight: 400;
   letter-spacing: -0.02em;
@@ -1108,7 +1108,7 @@ section {
 }
 
 .header__title {
-  font-family: "Bree Serif", serif;
+  font-family: "Lato", sans serif;
   font-size: 34px;
   font-weight: 400;
   letter-spacing: 0em;
@@ -1132,7 +1132,7 @@ section {
 .header__tagline {
   display: none;
   margin-top: 10px;
-  font-family: "Raleway", sans-serif;
+  font-family: "Arsenal", sans-serif;
   font-size: 16px;
   font-weight: 400;
   letter-spacing: 0em;
@@ -2332,7 +2332,7 @@ section {
   overflow-x: scroll;
 }
 .item_details blockquote {
-  font-family: "Raleway", sans-serif;
+  font-family: "Arsenal", sans-serif;
   padding-left: 15px;
   margin-top: 1em !important;
   border-left: 5px solid #eee;
@@ -2582,7 +2582,7 @@ a.plus-icon.minus:before {
 .frontpage h6 {
   font-size: 16px;
   font-weight: 400;
-  font-family: "Raleway", sans-serif;
+  font-family: "Arsenal", sans-serif;
 }
 
 h1,
@@ -2648,7 +2648,7 @@ a {
   float: left;
   line-height: 1.6;
   padding-top: 1em;
-  font-family: "Raleway", sans-serif;
+  font-family: "Arsenal", sans-serif;
 }
 .author-information span {
   position: absolute;
@@ -2663,12 +2663,12 @@ a {
 
 .header__title,
 .header__tagline {
-  font-family: "Bree Serif", serif !important;
+  font-family: "Lato", sans serif !important;
   font-weight: 700 !important;
 }
 
 .menu__list__item__link {
-  font-family: "Bree Serif", serif !important;
+  font-family: "Lato", sans serif !important;
   font-weight: 700 !important;
 }
 
