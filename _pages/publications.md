@@ -45,8 +45,8 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 {% bibliography_count --file talks.bib -q @unpublished[Eventtitle!=""] -q @unpublished %}
 {% endcapture %}
 
-<p></p>
-<h2 class="bibliography" style="counter-reset:bibitem {{numItems|plus:1}}">
+ <p></p>
+ <h2 class="bibliography" style="counter-reset:bibitem {{numItems|plus:1}}">
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.talks" data-text="Collapse">Selected Talks & Presentations</a></h2>
 
 <div class="collapse talks show">

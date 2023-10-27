@@ -1,6 +1,6 @@
 ---
 title: Teaching
-description: Zvi Biener - Teaching
+description: Chris Smeenk - Teaching
 image: /images/CathedralofLearning.jpeg
 notitle: true
 toggle: hideall
