@@ -38,5 +38,5 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.shortarticles" data-text="Collapse">Reviews and other Contributions</a></h2>
 
 <div class="collapse shortarticles show">
-{% bibliography -q @article[kind=short] @incollection[kind=short] --template bib_item_publication %}
+{% bibliography -q @article[kind=short] @incollection[kind=short] --template bib_item_publication_short %}
 </div>
