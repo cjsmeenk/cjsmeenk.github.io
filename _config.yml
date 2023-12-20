@@ -100,7 +100,7 @@ pagination:
   enabled: true
   per_page: 100  
   permalink: '/page/:num/'
-  limit: 2
+  limit: 0
   sort_field: 'date'
   sort_reverse: true
 
