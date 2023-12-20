@@ -98,9 +98,9 @@ scholar:
 
 pagination:
   enabled: true
-  per_page: 500  
+  per_page: 100  
   permalink: '/page/:num/'
-  limit: 0
+  limit: 2
   sort_field: 'date'
   sort_reverse: true
 
