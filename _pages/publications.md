@@ -22,7 +22,7 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 
 
 {% capture numItems %}
-{% bibliography_count -q @article @incollection %}
+{% bibliography_count -q @article[kind!=short] @incollection[kind!=short] %}
 {% endcapture %}
 
 <p></p>
@@ -37,6 +37,6 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 <h2 class="bibliography">
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.shortarticles" data-text="Collapse">Reviews and other Contributions</a></h2>
 
-<div class="collapse shortarticles show">
+<div class="nolisting collapse shortarticles show">
 {% bibliography -q @article[kind=short] @incollection[kind=short] --template bib_item_publication_short %}
 </div>

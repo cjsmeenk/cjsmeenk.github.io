@@ -15,11 +15,14 @@
     <div id="{{key}}-links" class="biblinks clearfix">
       <ul>
         {% if link %}
-        <li><a data-toggle="collapse"  data-target=".collapse.{{key}}-slides">Slides</a></li>
+        <li><a data-toggle="collapse"  data-target=".collapse.{{key}}-slides" href="{{link}}">Slides</a></li>
         {% endif %}
         {% if entry.abstract %}
         <li><a data-toggle="collapse"  data-target=".collapse.{{key}}-abstract">Abstract</a></li>
         {% endif %}
+	    {% if entry.url %}
+	    <li><a href="{{entry.url}}" target="_blank">Video</a></li>
+	    {% endif %}
       </ul>
     </div>
     
