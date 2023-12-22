@@ -13,7 +13,7 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 
 <p></p>
 <h2 class="bibliography" style="counter-reset:bibitem {{numItems|plus:1}}">
-	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.talks" data-text="Collapse">Academic Talks</a></h2>
+	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.talks" data-text="Collapse">Academic Talks (selected)</a></h2>
 
 <p>(See CV for a complete list of talks and presentations.)<br><br></p>
 
@@ -24,7 +24,7 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 
 <p></p>
 <h2 class="bibliography">
-	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.public" data-text="Collapse">Public Talks</a></h2>
+	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.public" data-text="Collapse">Public Talks (selected)</a></h2>
 
 <div class="nolisting public collapse show">
 {% bibliography --file talks.bib -q @unpublished[kind=public, selected=true] --template bib_item_talk %}

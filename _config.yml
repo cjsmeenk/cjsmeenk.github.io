@@ -11,10 +11,13 @@ collections:
     permalink: /:name/
   posts:
     output: true
-    permalink: /blog/:slug
+    permalink: /blog/:slug/
   projects:
     output: true
     permalink: /projects/:slug/
+  people:
+    output: true
+    permalink: /people/:slug/
 
 
 defaults:
