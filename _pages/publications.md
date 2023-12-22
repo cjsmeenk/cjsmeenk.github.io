@@ -35,6 +35,14 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 
 <p></p>
 <h2 class="bibliography">
+	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.wip" data-text="Collapse">Thesis and Works in Progress</a></h2>
+
+<div class="nolisting collapse wip show">
+{% bibliography -q @unpublished @phdthesis --template bib_item_publication_unpublished %}
+</div>
+
+<p></p>
+<h2 class="bibliography">
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.shortarticles" data-text="Collapse">Reviews and other Contributions</a></h2>
 
 <div class="nolisting collapse shortarticles show">
