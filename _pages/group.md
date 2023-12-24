@@ -4,10 +4,10 @@ description: Group Members
 image: /images/NDPC.jpg
 toggle: hideall
 notitle: true
-target: .collapse.people
+target: .collapse.group
 ---
 
-{% for people in site.group reversed %}
+{% for group in site.group reversed %}
         
 <a name="{{group.title | slugify }}"></a>
 <h2 class="header-switch-onhover" data-image="{{ group.image }}">

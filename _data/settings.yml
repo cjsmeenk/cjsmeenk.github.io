@@ -2,7 +2,7 @@ basic_settings:
   site_title: Chris Smeenk
   site_tagline: 
   favicon_image: /images/favicon.png
-  rss: '/feed.xml'
+#  rss: '/feed.xml'
 
 header_settings:
   logo_image: 

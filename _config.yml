@@ -15,7 +15,7 @@ collections:
   projects:
     output: true
     permalink: /projects/:slug/
-  people:
+  group:
     output: true
     permalink: /group/:slug/
 
