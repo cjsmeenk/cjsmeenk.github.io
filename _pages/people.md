@@ -1,5 +1,5 @@
 ---
-title: People
+title: Group
 description: Group Members
 image: /images/NDPC.jpg
 toggle: hideall

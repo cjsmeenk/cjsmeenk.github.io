@@ -62,8 +62,9 @@ plugins:
   - jekyll/scholar
   - rouge
  
-feed:
-  excerpt_only: false
+# commented out RSS feed
+# feed:
+#  excerpt_only: false
 
 # Additions:
 
