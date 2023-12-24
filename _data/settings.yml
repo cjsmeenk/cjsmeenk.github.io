@@ -14,8 +14,8 @@ menu_settings:
   menu_items:
     - title: 'Research'
       url: '/projects/'
-    - title: 'People'
-      url: '/people/'
+    - title: 'Group'
+      url: '/group/'
     - title: 'Publications'
       url: '/publications/'
     - title: 'Talks'
