@@ -1,7 +1,7 @@
 ---
 title: 'Craig Fox'
-date: 2023-12-27
-image: '/images/CraigFox.jpeg'
+date: 2023-12-24
+image: '/images/craigfox.jpeg'
 description: Profile
 
 ---

@@ -1,6 +1,6 @@
 ---
 title: 'Seventeenth Century Natural Philosophy'
-date: 2023-10-26
+date: 2023-08-26
 image: '/images/17thCent.jpeg'
 description: Research program
 

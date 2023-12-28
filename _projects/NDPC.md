@@ -1,6 +1,6 @@
 ---
 title: 'New Directions in Philosophy of Cosmology'
-date: 2022-10-24
+date: 2023-12-24
 image: '/images/NDPC.jpg'
 description: Interdisciplinary research project funded through 2 JTF grants
 

@@ -35,7 +35,7 @@ target: .collapse.group
 {% endfor %}
 
 <p><h2>
-	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.alumni" data-text="Collapse">Recent Alumni</a>&nbsp;
+	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.alumni" data-text="Collapse">Alumni</a>&nbsp;
 </h2></p>
 
 <p>(See CV for a complete list of former postdocs and PhD students.)</p>

@@ -1,6 +1,6 @@
 ---
 title: 'Niels Linnemann'
-date: 2023-12-27
+date: 2023-12-24
 image: '/images/nielslinnemann.jpeg'
 description: Profile
 

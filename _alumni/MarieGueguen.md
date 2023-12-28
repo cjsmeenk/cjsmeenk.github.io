@@ -1,6 +1,6 @@
 ---
 title: 'Marie Gueguen'
-date: 2023-12-27
+date: 2023-12-22
 image: '/images/MarieGueguen.jpeg'
 description: Profile
 

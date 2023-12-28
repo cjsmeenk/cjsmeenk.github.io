@@ -1,7 +1,7 @@
 ---
 title: 'Mark Baker'
-date: 2023-12-27
-image: '/images/MarkBaker.jpeg'
+date: 2023-12-23
+image: '/images/markbaker.jpeg'
 description: Profile
 
 ---
