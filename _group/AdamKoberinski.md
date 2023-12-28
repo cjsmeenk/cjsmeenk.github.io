@@ -1,6 +1,6 @@
 ---
 title: 'Adam Koberinski'
-date: 2023-12-21
+date: 2023-12-20
 image: '/images/AdamKoberinski.jpeg'
 description: Profile
 

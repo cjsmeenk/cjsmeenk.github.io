@@ -18,6 +18,10 @@ collections:
   group:
     output: true
     permalink: /group/:slug/
+  alumni:
+    output: true
+    permalink: /alumni/:slug/
+
 
 
 defaults:
