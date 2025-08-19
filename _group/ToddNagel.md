@@ -1,7 +1,7 @@
 ---
 title: 'Todd Nagel'
 date: 2023-12-16
-image: '/images/ToddNagel.jpg'
+image: '/images/ToddNagel2.jpg'
 description: Profile
 
 ---

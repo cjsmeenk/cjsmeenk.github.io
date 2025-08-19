@@ -16,7 +16,7 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 </h2>
 
 <div class="collapse editedbooks show">
-{% bibliography -q @book --template bib_item_publication %}
+{% bibliography -q @book --template bib_item_publication --limit 0 %}
 </div>
 
 
@@ -30,7 +30,7 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.articles" data-text="Collapse">Articles</a></h2>
 
 <div class="articles collapse show">
-{% bibliography --query @article[kind!=short] @incollection[kind!=short] --template bib_item_publication %}
+{% bibliography --query @article[kind!=short] @incollection[kind!=short] --template bib_item_publication --limit 0 %}
 </div>
 
 <p></p>
@@ -38,7 +38,7 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.wip" data-text="Collapse">Works in Progress</a></h2>
 
 <div class="nolisting collapse wip show">
-{% bibliography -q @unpublished --template bib_item_publication_unpublished %}
+{% bibliography -q @unpublished --template bib_item_publication_unpublished --limit 0 %}
 </div>
 
 <p></p>
@@ -46,7 +46,7 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.phd" data-text="Collapse">Thesis</a></h2>
 
 <div class="nolisting collapse phd show">
-{% bibliography -q @phdthesis --template bib_item_publication_unpublished %}
+{% bibliography -q @phdthesis --template bib_item_publication_unpublished --limit 0 %}
 </div>
 
 <p></p>
@@ -54,5 +54,5 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.shortarticles" data-text="Collapse">Reviews and other Contributions</a></h2>
 
 <div class="nolisting collapse shortarticles show">
-{% bibliography -q @article[kind=short] @incollection[kind=short] --template bib_item_publication_short %}
+{% bibliography -q @article[kind=short] @incollection[kind=short] --template bib_item_publication_short --limit 0 %}
 </div>
