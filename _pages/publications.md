@@ -19,8 +19,6 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 {% bibliography -q @book --template bib_item_publication --limit 0 %}
 </div>
 
-
-
 {% capture numItems %}
 {% bibliography_count -q @article[kind!=short] @incollection[kind!=short] %}
 {% endcapture %}
