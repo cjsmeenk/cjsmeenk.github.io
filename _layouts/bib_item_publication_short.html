@@ -2,7 +2,7 @@
 ---
 
 <a name="{{entry.key}}-anchor"></a><a class="title" data-toggle="collapse" data-target=".{{ entry.key }}.collapse">{% if entry.type == "book" %}{{ entry.booktitle }}{% elsif entry.type == "article" %}{{ entry.title }}
-{% elsif entry.type == "misc" %}{ entry.title }}{% elsif entry.type == "incollection" %}{{ entry.title }}
+{% elsif entry.type == "misc" %}{{ entry.title }}{% elsif entry.type == "incollection" %}{{ entry.title }}
 {% endif %}</a><br>
 
 <div id="{{key}}-fullentry" class="collapse {{ entry.key }} fullentry show">

@@ -1,0 +1,81 @@
+---
+---
+{% if entry.type == "book" %}{{ entry.booktitle }}{% elsif entry.type == "article" %}{{ entry.title }}{% elsif entry.type == "misc" %}{{ entry.title }}{% elsif entry.type == "incollection" %}{{ entry.title }}{% endif %}
+
+{% if entry.author contains "and" %}
+(with {{ entry.author | remove: "Smeenk, Chris and " | remove: " and Smeenk, Chris"}})
+{% elsif entry.editor contains "and" %}
+  {% unless entry.author == "Smeenk, Chris" %}
+  (with {{ entry.editor | remove: "Smeenk, Chris and " | remove: " and Smeenk, Chris"}})
+  {% endunless %}
+{% endif %}
+
+{% if entry.type == "book" %}{{ entry.publisher }}{% elsif entry.type == "article" %}*{{ entry.journal }}*{% elsif entry.type == "misc" %}*{{ entry.journal }}*{% elsif entry.type == "incollection" %}In *{{ entry.booktitle }}*, {{ entry.publisher }}{% endif %}
+
+{{ heading }} ({{ entry.date }})
+
+{% assign pic = "false" %}
+{% if links.png %}{% assign pic = links.png %}
+{% elsif links.jpg %}{% assign pic = links.jpg %}
+{% elsif links.jpeg %}{% assign pic = links.jpeg %}
+{% elsif links.pic %}{% assign pic = links.pic %}
+{% elsif links.tiff %}{% assign pic = links.tiff %}
+{% endif %}
+
+<ul class="nav nav-pills">
+{% if link %}
+  <li><a href="{{ link }}">Preprint</a></li>
+{% endif %}
+{% if entry.amazon %}
+  <li><a href="{{ entry.amazon }}">Amazon</a></li>
+{% endif %}
+{% if entry.doi %}
+  <li><a href="http://dx.doi.org/{{ entry.doi }}">Published version</a></li>
+{% endif %}
+{% if entry.url AND !entry.doi %}
+  <li><a href="{{ entry.url }}">Published version</a></li>
+{% endif %}
+  <li><a data-toggle="collapse" href="#{{entry.key}}-bibtex">BibTeX</a></li>
+  <li><a data-toggle="collapse" href="#{{entry.key}}-fullentry">Full Cite</a></li>
+{% if entry.abstract %}
+  <li><a data-toggle="collapse" href="#{{entry.key}}-abstract">Abstract</a></li>
+{% endif %}
+</ul>
+
+{% if pic != "false" %}
+<div class="row">
+  <div class="col-sm-9">
+{% else %}
+<div class="row">
+  <div class="col-sm-12">
+{% endif %}
+
+<div id="{{entry.key}}-bibtex" class="collapse bibtex">
+  <h4>BibTeX</h4>
+  <div class="highlighter-rouge"><pre class="highlight"><code>{{entry.bibtex}}</code></pre></div>
+</div>
+
+<div id="{{entry.key}}-fullentry" class="collapse fullentry">
+  <h4>Citation</h4>
+  <div class="well">{{reference}}</div>
+</div>
+
+{% if entry.abstract %}
+<div id="{{entry.key}}-abstract" class="collapse abstract">
+  <h4>Abstract</h4>
+  <div class="well">{{entry.abstract}}</div>
+</div>
+{% else %}
+<div id="{{entry.key}}-abstract" class="collapse abstract">
+  <h4>Abstract</h4>
+  <div class="well">No abstract available.</div>
+</div>
+{% endif %}
+
+  </div>
+{% if pic != "false" %}
+  <div class="col-sm-3">
+    <img src="{{ pic }}" class="img-fluid" alt="Publication image">
+  </div>
+{% endif %}
+</div>
