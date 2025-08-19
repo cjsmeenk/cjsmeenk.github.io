@@ -19,31 +19,29 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 {% bibliography -q @book --template bib_item_publication --limit 0 %}
 </div>
 
-<!-- Calculate total articles and incollections for first counter -->
-{% capture totalArticlesAndIncollections %}
-{% bibliography_count -q @article[kind!=short] %}{% bibliography_count -q @incollection[kind!=short] %}
-{% endcapture %}
-{% assign totalCount = totalArticlesAndIncollections | plus: 0 %}
 
-<!-- Calculate just articles for second counter -->
-{% capture numArticles %}
-{% bibliography_count -q @article[kind!=short] %}
+
+{% capture numItems %}
+{% bibliography_count -q @article[kind!=short] @incollection[kind!=short] %}
 {% endcapture %}
-{% assign articleCount = numArticles | plus: 0 %}
 
 <p></p>
-<h2 class="bibliography" style="counter-reset:bibitem {{totalCount|plus:1}}">
+<h2 class="bibliography" style="counter-reset:bibitem {{numItems|plus:1}}">
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.articles" data-text="Collapse">Articles</a></h2>
 
 <div class="articles collapse show">
 {% bibliography -q @article[kind!=short] --template bib_item_publication %}
 </div>
 
-<p></p>
-<h2 class="bibliography" style="counter-reset:bibitem {{articleCount|plus:1}}">
-	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.incollections" data-text="Collapse">In Collections</a></h2>
+{% capture numItems %}
+{% bibliography_count -q @incollection[kind!=short] %}
+{% endcapture %}
 
-<div class="incollections collapse show">
+<p></p>
+<h2 class="bibliography" style="counter-reset:bibitem {{numItems|plus:1}}">
+	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.articles" data-text="Collapse">In Collections</a></h2>
+
+<div class="articles collapse show">
 {% bibliography -q @incollection[kind!=short] --template bib_item_publication %}
 </div>
 
