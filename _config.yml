@@ -104,13 +104,13 @@ scholar:
 #permalink: /:year/:month/:title.html
 #permalink: pretty
 
-pagination:
-  enabled: true
-  per_page: 100  
-  permalink: '/page/:num/'
-  limit: 0
-  sort_field: 'date'
-  sort_reverse: true
+# pagination:
+#  enabled: true
+#  per_page: 100  
+#  permalink: '/page/:num/'
+#  limit: 0
+#  sort_field: 'date'
+#  sort_reverse: true
 
 
 exclude:
