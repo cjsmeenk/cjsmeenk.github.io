@@ -15,7 +15,7 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.editedbooks" data-text="Collapse">Edited Books</a>&nbsp;
 </h2>
 
-<div class="collapse editedbooks">
+<div class="collapse editedbooks show">
 {% bibliography -q @book --template bib_item_publication --limit 0 %}
 </div>
 
@@ -29,7 +29,7 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 <h2 class="bibliography" style="counter-reset:bibitem {{numItems|plus:1}}">
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.articles" data-text="Collapse">Articles</a></h2>
 
-<div class="articles collapse">
+<div class="articles collapse show">
 {% bibliography -q @article[kind!=short] --template bib_item_publication %}
 </div>
 
@@ -41,7 +41,7 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 <h2 class="bibliography" style="counter-reset:bibitem {{numItems|plus:1}}">
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.articles" data-text="Collapse">In Collections</a></h2>
 
-<div class="articles collapse">
+<div class="articles collapse show">
 {% bibliography -q @incollection[kind!=short] --template bib_item_publication %}
 </div>
 
@@ -51,7 +51,7 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 <h2 class="bibliography">
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.wip" data-text="Collapse">Works in Progress</a></h2>
 
-<div class="nolisting collapse wip">
+<div class="nolisting collapse wip show">
 {% bibliography -q @unpublished --template bib_item_publication_unpublished %}
 </div>
 
@@ -59,7 +59,7 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 <h2 class="bibliography">
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.phd" data-text="Collapse">Thesis</a></h2>
 
-<div class="nolisting collapse phd">
+<div class="nolisting collapse phd show">
 {% bibliography -q @phdthesis --template bib_item_publication_unpublished %}
 </div>
 
@@ -67,7 +67,7 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 <h2 class="bibliography">
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.shortarticles" data-text="Collapse">Reviews and other Contributions</a></h2>
 
-<div class="nolisting collapse shortarticles">
+<div class="nolisting collapse shortarticles show">
 {% bibliography -q @article[kind=short] @incollection[kind=short] --template bib_item_publication_short %}
 </div>
 
