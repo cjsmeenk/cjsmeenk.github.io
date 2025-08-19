@@ -56,3 +56,13 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 <div class="nolisting collapse shortarticles show">
 {% bibliography -q @article[kind=short] @incollection[kind=short] --template bib_item_publication_short --limit 0 %}
 </div>
+
+<p>Debug info:</p>
+<ul>
+<li>Total @book entries: {% bibliography_count -q @book %}</li>
+<li>Total @article[kind!=short]: {% bibliography_count -q @article[kind!=short] %}</li>
+<li>Total @incollection[kind!=short]: {% bibliography_count -q @incollection[kind!=short] %}</li>
+<li>Total @unpublished: {% bibliography_count -q @unpublished %}</li>
+<li>Total @phdthesis: {% bibliography_count -q @phdthesis %}</li>
+<li>Total @article[kind=short]: {% bibliography_count -q @article[kind=short] %}</li>
+</ul>
