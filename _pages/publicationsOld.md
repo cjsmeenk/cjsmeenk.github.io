@@ -30,7 +30,7 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.articles" data-text="Collapse">Articles</a></h2>
 
 <div class="articles collapse show">
-{% bibliography --query @article[kind!=short] @incollection[kind!=short] }
+{% bibliography --query @article[kind!=short] @incollection[kind!=short] --template bib_item_publication --limit 0 %}
 </div>
 
 <p></p>
@@ -38,7 +38,7 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.wip" data-text="Collapse">Works in Progress</a></h2>
 
 <div class="nolisting collapse wip show">
-{% bibliography -q @unpublished }
+{% bibliography -q @unpublished --template bib_item_publication_unpublished --limit 0 %}
 </div>
 
 <p></p>
