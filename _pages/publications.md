@@ -30,7 +30,7 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.articles" data-text="Collapse">Articles</a></h2>
 
 <div class="articles collapse show">
-{% bibliography --query @article[kind!=short] @incollection[kind!=short] }
+{% bibliography --query @article[kind!=short] @incollection[kind!=short] --template test_template}
 </div>
 
 <p></p>
