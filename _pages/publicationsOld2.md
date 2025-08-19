@@ -30,7 +30,7 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.articles" data-text="Collapse">Articles</a></h2>
 
 <div class="articles collapse show">
-{% bibliography --query @article[kind!=short] @incollection[kind!=short] --template bib_item_publication --limit 100 %}
+{% bibliography --query @article[kind!=short] @incollection[kind!=short] --template bib_item_publication --limit 0 %}
 </div>
 
 <p></p>
@@ -38,7 +38,7 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.wip" data-text="Collapse">Works in Progress</a></h2>
 
 <div class="nolisting collapse wip show">
-{% bibliography -q @unpublished --template bib_item_publication_unpublished --limit 100 %}
+{% bibliography -q @unpublished --template bib_item_publication_unpublished --limit 0 %}
 </div>
 
 <p></p>
@@ -46,7 +46,7 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.phd" data-text="Collapse">Thesis</a></h2>
 
 <div class="nolisting collapse phd show">
-{% bibliography -q @phdthesis --template bib_item_publication_unpublished --limit 100 %}
+{% bibliography -q @phdthesis --template bib_item_publication_unpublished --limit 0 %}
 </div>
 
 <p></p>
@@ -54,6 +54,6 @@ target: .collapse.citation, .collapse.abstract, .collapse.bibtex, .collapse.full
 	<a class="plus-icon minus" data-toggle="collapse"  data-target=".collapse.shortarticles" data-text="Collapse">Reviews and other Contributions</a></h2>
 
 <div class="nolisting collapse shortarticles show">
-{% bibliography -q @article[kind=short] @incollection[kind=short] --template bib_item_publication_short --limit 100 %}
+{% bibliography -q @article[kind=short] @incollection[kind=short] --template bib_item_publication_short --limit 0 %}
 </div>
 

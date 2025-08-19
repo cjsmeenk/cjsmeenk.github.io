@@ -104,7 +104,7 @@ scholar:
 #permalink: /:year/:month/:title.html
 #permalink: pretty
 
- pagination:
+pagination:
   enabled: true
   per_page: 100  
   permalink: '/page/:num/'
