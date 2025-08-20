@@ -6,4 +6,4 @@ description: Profile
 
 ---
 
-PhD (2021), [Back to the Beginning: An Empiricist Defense of Scientific Stories About the Past](https://ir.lib.uwo.ca/etd/7798), current webpage.
+PhD (2021), [Back to the Beginning: An Empiricist Defense of Scientific Stories About the Past](https://ir.lib.uwo.ca/etd/7798), [current webpage](https://www.macewan.ca/academics/academic-departments/humanities/our-people/profile/?profileid=foxc28).
