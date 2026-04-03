@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Empiricism and the Philosophy of Physics — UCLA Phil 233</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#1a1a1a;--paper:#faf8f4;--accent:#2c4a6e;--accent-light:#e8eef5;--muted:#6b6b6b;--border:#d4cfc6;--highlight:#c9a227;--sidebar-bg:#f0ece4;--shadow:rgba(0,0,0,0.06);--radius:4px}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--paper);color:var(--ink);line-height:1.65;font-size:16px}
+    #password-gate{position:fixed;inset:0;background:var(--accent);display:flex;align-items:center;justify-content:center;z-index:9999}
+    #password-gate.hidden{display:none}
+    .gate-box{background:#fff;border-radius:6px;padding:2.5rem 2.5rem 2rem;max-width:420px;width:90%;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.25)}
+    .gate-box .dept-label{font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:.4rem}
+    .gate-box h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.45rem;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:.25rem}
+    .gate-box .gate-subtitle{font-family:'Cormorant Garamond',Georgia,serif;font-size:1rem;font-style:italic;color:var(--muted);margin-bottom:1.5rem}
+    .gate-box p{font-size:.9rem;color:var(--muted);margin-bottom:1rem}
+    .gate-input-row{display:flex;gap:.5rem}
+    .gate-input-row input{flex:1;font-family:'Source Sans 3',sans-serif;font-size:.95rem;padding:.65rem 1rem;border:1px solid var(--border);border-radius:var(--radius);outline:none}
+    .gate-input-row input:focus{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-light)}
+    .gate-input-row button{font-family:'Source Sans 3',sans-serif;font-size:.9rem;font-weight:600;padding:.65rem 1.25rem;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);cursor:pointer;white-space:nowrap}
+    .gate-input-row button:hover{opacity:.9}
+    .gate-error{font-size:.85rem;color:#b91c1c;margin-top:.6rem;min-height:1.2em}
+    #site-content.locked{display:none}
+    header{background:var(--accent);color:#fff;padding:2.5rem 2rem 2rem;border-bottom:4px solid var(--highlight)}
+    header .container{max-width:960px;margin:0 auto}
+    header .dept{font-size:.85rem;font-weight:300;letter-spacing:.15em;text-transform:uppercase;opacity:.8;margin-bottom:.5rem}
+    header h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:2rem;font-weight:600;line-height:1.25;margin-bottom:.3rem}
+    header .subtitle{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.15rem;font-style:italic;opacity:.85;margin-bottom:1rem}
+    header .meta{font-size:.9rem;opacity:.8;line-height:1.7}
+    header .meta strong{font-weight:600;opacity:1}
+    nav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px var(--shadow)}
+    nav .container{max-width:960px;margin:0 auto;display:flex}
+    nav button{font-family:'Source Sans 3',sans-serif;font-size:.95rem;background:none;border:none;padding:.85rem 1.5rem;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent;transition:all .2s}
+    nav button:hover{color:var(--ink);background:var(--accent-light)}
+    nav button.active{color:var(--accent);font-weight:600;border-bottom-color:var(--accent)}
+    main{max-width:960px;margin:0 auto;padding:2rem}
+    .tab-content{display:none}.tab-content.active{display:block}
+    .overview-intro{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.12rem;line-height:1.75;color:#333;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+    .overview-details{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    @media(max-width:640px){.overview-details{grid-template-columns:1fr}}
+    .detail-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem}
+    .detail-card h3{font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:.5rem}
+    .detail-card p{font-size:.95rem;color:#444}
+    .part-header{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.3rem;font-weight:600;color:var(--accent);margin:2rem 0 1rem;padding-bottom:.4rem;border-bottom:2px solid var(--accent)}
+    .part-header:first-child{margin-top:0}
+    .week{background:#fff;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:.75rem;overflow:hidden;transition:box-shadow .2s}
+    .week:hover{box-shadow:0 2px 10px var(--shadow)}
+    .week-header{display:flex;align-items:center;padding:.9rem 1.25rem;cursor:pointer;user-select:none;gap:.75rem}
+    .week-num{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#fff;background:var(--accent);padding:.2rem .6rem;border-radius:3px;white-space:nowrap}
+    .week-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.1rem;font-weight:600;flex:1}
+    .week-toggle{font-size:1.2rem;color:var(--muted);transition:transform .25s}
+    .week.open .week-toggle{transform:rotate(90deg)}
+    .week-body{display:none;padding:0 1.25rem 1.25rem;border-top:1px solid var(--border)}
+    .week.open .week-body{display:block}
+    .week-body .description{font-size:.95rem;color:#444;margin:1rem 0}
+    .reading-group{margin-bottom:.75rem}
+    .reading-group h4{font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:.35rem}
+    .reading-group ul{list-style:none;padding:0}
+    .reading-group li{font-size:.93rem;padding:.3rem 0 .3rem 1.1rem;position:relative;color:#444;line-height:1.55}
+    .reading-group li::before{content:'\2014';position:absolute;left:0;color:var(--muted)}
+    a.pdf-link{color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent)}
+    a.pdf-link:hover{border-bottom-style:solid}
+    .no-file{opacity:.6;font-size:.82rem;margin-left:.3rem}
+    .archive-intro{font-size:.95rem;color:var(--muted);margin-bottom:1.25rem;padding:.75rem 1rem;background:var(--accent-light);border-radius:var(--radius);border-left:3px solid var(--accent)}
+    .archive-list{list-style:none;background:#fff;border:1px solid var(--border);border-radius:var(--radius)}
+    .archive-list li{padding:.55rem 1.25rem;border-bottom:1px solid var(--border);font-size:.93rem}
+    .archive-list li:last-child{border-bottom:none}
+    .archive-list li a{color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent)}
+    .archive-list li a:hover{border-bottom-style:solid}
+    .archive-list .au{font-weight:600}
+    .discussion-intro{font-size:.95rem;color:#444;margin-bottom:1.5rem;padding:1rem 1.25rem;background:var(--accent-light);border-radius:var(--radius);border-left:3px solid var(--accent);line-height:1.7}
+    .thread-selector{display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+    .thread-btn{font-family:'Source Sans 3',sans-serif;font-size:.82rem;font-weight:600;padding:.4rem .85rem;border:1px solid var(--border);border-radius:20px;background:#fff;cursor:pointer;color:var(--muted);transition:all .15s}
+    .thread-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .thread-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .post-form{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1.5rem}
+    .post-form h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.1rem;font-weight:600;margin-bottom:.75rem}
+    .form-row{margin-bottom:.75rem}
+    .form-row label{display:block;font-size:.82rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:.25rem}
+    .form-row input,.form-row textarea{width:100%;font-family:'Source Sans 3',sans-serif;font-size:.95rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:var(--radius);outline:none;background:var(--paper)}
+    .form-row textarea{min-height:100px;resize:vertical;line-height:1.6}
+    .form-row input:focus,.form-row textarea:focus{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-light)}
+    .post-submit{font-family:'Source Sans 3',sans-serif;font-size:.9rem;font-weight:600;padding:.6rem 1.5rem;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);cursor:pointer}
+    .post-submit:hover{opacity:.9}
+    .post-submit:disabled{opacity:.5;cursor:not-allowed}
+    .posts-container{border:1px solid var(--border);border-radius:var(--radius);background:#fff;overflow:hidden}
+    .posts-header{padding:.75rem 1.25rem;background:var(--sidebar-bg);border-bottom:1px solid var(--border);font-size:.85rem;font-weight:600;color:var(--muted)}
+    .post{padding:1rem 1.25rem;border-bottom:1px solid var(--border)}.post:last-child{border-bottom:none}
+    .post-meta{display:flex;align-items:baseline;gap:.6rem;margin-bottom:.4rem}
+    .post-author{font-weight:600;font-size:.95rem;color:var(--accent)}
+    .post-date{font-size:.8rem;color:var(--muted)}
+    .post-body{font-size:.95rem;color:#333;line-height:1.7;white-space:pre-wrap}
+    .post-reply-btn{font-size:.8rem;color:var(--muted);background:none;border:none;cursor:pointer;margin-top:.4rem;padding:0}
+    .post-reply-btn:hover{color:var(--accent)}
+    .post-replies{margin-top:.6rem;margin-left:1.25rem;padding-left:1rem;border-left:2px solid var(--border)}
+    .reply{padding:.5rem 0}.reply+.reply{border-top:1px solid #eee}
+    .reply-form{margin-top:.6rem;margin-left:1.25rem;padding-left:1rem;border-left:2px solid var(--accent-light)}
+    .reply-form textarea{width:100%;font-family:'Source Sans 3',sans-serif;font-size:.9rem;padding:.45rem .75rem;border:1px solid var(--border);border-radius:var(--radius);min-height:60px;resize:vertical;outline:none;background:var(--paper);margin-bottom:.4rem}
+    .reply-submit{font-family:'Source Sans 3',sans-serif;font-size:.82rem;font-weight:600;padding:.4rem 1rem;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);cursor:pointer;margin-right:.5rem}
+    .reply-cancel{font-family:'Source Sans 3',sans-serif;font-size:.82rem;padding:.4rem .75rem;background:none;color:var(--muted);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer}
+    .no-posts{padding:2.5rem 1.25rem;text-align:center;color:var(--muted);font-size:.95rem}
+    .db-error{padding:1.5rem;text-align:center;color:#b91c1c;font-size:.9rem;background:#fef2f2;border-radius:var(--radius);margin-bottom:1rem}
+    footer{text-align:center;padding:2rem;font-size:.85rem;color:var(--muted);border-top:1px solid var(--border);margin-top:3rem}
+    @media(max-width:640px){header h1{font-size:1.5rem}nav button{padding:.7rem 1rem;font-size:.88rem}main{padding:1.25rem}.thread-selector{gap:.35rem}.thread-btn{font-size:.75rem;padding:.3rem .6rem}}
+  </style>
+</head>
+<body>
+  <div id="password-gate">
+    <div class="gate-box">
+      <div class="dept-label">UCLA Department of Philosophy &middot; Spring 2026</div>
+      <h2>Empiricism and the Philosophy of Physics</h2>
+      <div class="gate-subtitle">Phil 233 Graduate Seminar</div>
+      <p>Enter the course password to access the site.</p>
+      <div class="gate-input-row">
+        <input type="password" id="gate-password" placeholder="Password" autocomplete="off">
+        <button id="gate-submit">Enter</button>
+      </div>
+      <div class="gate-error" id="gate-error"></div>
+    </div>
+  </div>
+
+  <div id="site-content" class="locked">
+    <header>
+      <div class="container">
+        <div class="dept">UCLA Department of Philosophy &middot; Spring 2026</div>
+        <h1>Empiricism and the Philosophy of Physics</h1>
+        <div class="subtitle">Theory-Mediated Measurement and Effective Field Theories</div>
+        <div class="meta">
+          <strong>Instructor:</strong> Chris Smeenk &nbsp;&middot;&nbsp;
+          <strong>Time:</strong> W 2:00&#8211;4:50 &nbsp;&middot;&nbsp;
+          <strong>Location:</strong> Bunche 2173<br>
+          <strong>Office Hours:</strong> TBD &nbsp;&middot;&nbsp;
+          <strong>Contact:</strong> chris.smeenk@gmail.com
+        </div>
+      </div>
+    </header>
+
+    <nav><div class="container">
+      <button class="active" data-tab="overview">Overview</button>
+      <button data-tab="schedule">Schedule &amp; Readings</button>
+      <button data-tab="archive">Reading List</button>
+      <button data-tab="discussion">Discussion</button>
+    </div></nav>
+
+    <main>
+
+      <!-- ═══ OVERVIEW ═══ -->
+      <section id="overview" class="tab-content active">
+        <div class="overview-intro">
+          How should we characterize the structure and content of physical theories? Many philosophers of science have analyzed scientific theories using mathematical logic, following the logical positivists. This seminar considers recent work in philosophy of physics that takes a different starting point: how theories are actually applied, and the mathematical tools&mdash;approximation methods, perturbative techniques, scaling arguments, iterative refinement&mdash;used in those applications. This shift in focus, from formal logical structure to the practices of approximation, measurement, and scale-dependent modeling, reveals aspects of theory structure that earlier accounts ignored.
+          <br><br>
+          First we consider an account of the content of theories that takes <em>theory-mediated measurement</em> as a guiding idea. This raises a threat of circularity: the measurement of theoretical quantities presupposes the very theory that measurement is meant to test. This apparent circularity can be resolved through an iterative, eliminative methodology, exemplified in historical cases. In the second half of the seminar, we consider how this picture relates to the framework of <em>effective field theories</em> (EFTs), which has transformed how physicists understand the scope and validity of physical theories. The EFT perspective suggests that theories are valid within limited domains, rather than providing complete descriptions of possible worlds.
+        </div>
+        <div class="overview-details">
+          <div class="detail-card"><h3>Participation (20%)</h3><p>Active seminar participation based on careful reading and reflection. Half is based on contributions over the term; the other half on a 30-minute presentation on a topic of your choice.</p></div>
+          <div class="detail-card"><h3>Commentaries (10%)</h3><p>Post short commentaries (250&#8211;500 words) on the assigned readings by 5:00 p.m. Monday each week on the Discussion tab. You may skip one week without penalty.</p></div>
+          <div class="detail-card"><h3>Paper (70%)</h3><p>A research paper of 6,000&#8211;7,500 words. A topic proposal and bibliography are due in Week 7; the final paper is due the week after the last meeting.</p></div>
+          <div class="detail-card"><h3>Background</h3><p>The seminar does not presume extensive background in physics. EFT material is introduced at a conceptual level, and we develop the necessary ideas together.</p></div>
+        </div>
+      </section>
+
+      <!-- ═══ SCHEDULE & READINGS ═══ -->
+      <section id="schedule" class="tab-content">
+        <div class="part-header">Part I &middot; From Duhem to Theory-Mediated Measurement</div>
+
+        <!-- WEEK 1 -->
+        <div class="week"><div class="week-header"><span class="week-num">Week 1</span><span class="week-title">Duhem&#8217;s <em>Aim and Structure</em></span><span class="week-toggle">&rsaquo;</span></div><div class="week-body">
+          <div class="reading-group"><h4>Assigned</h4><ul>
+            <li>Duhem, <em>The Aim and Structure of Physical Theory</em>: Part I, Ch. 1&#8211;4; Part II, Ch. 6</li>
+          </ul></div>
+          <div class="reading-group"><h4>Optional</h4><ul>
+            <li><a class="pdf-link" href="readings/AriewBarkeronDuhem.pdf">Ariew &amp; Barker, Introduction to <em>Essays in the History and Philosophy of Science</em></a></li>
+            <li><a class="pdf-link" href="readings/Stump2006.pdf">Stump, &#8220;Pierre Duhem&#8217;s Virtue Epistemology&#8221;</a></li>
+          </ul></div>
+        </div></div>
+
+        <!-- WEEK 2 -->
+        <div class="week"><div class="week-header"><span class="week-num">Week 2</span><span class="week-title">Coordination and the Problem of Measurement</span><span class="week-toggle">&rsaquo;</span></div><div class="week-body">
+          <p class="description">How do theoretical quantities get their empirical content? Measurement seems to require the theory it is meant to test, prompting worries about circularity. We examine the conventionalist response and Chang&#8217;s account of &#8220;epistemic iteration.&#8221;</p>
+          <div class="reading-group"><h4>Assigned</h4><ul>
+            <li><a class="pdf-link" href="readings/van%20Fraassen%20(2010%2C%20Chapters%205-7).pdf">van Fraassen, <em>Scientific Representation</em>, Chapters 5&#8211;6</a></li>
+            <li><a class="pdf-link" href="readings/Chang%20(2004%2C%20Chapter%205).pdf">Chang, <em>Inventing Temperature</em>, Chapter 5</a></li>
+          </ul></div>
+          <div class="reading-group"><h4>Optional</h4><ul>
+            <li>Poincar&eacute;, &#8220;The Measure of Time&#8221;</li>
+            <li><a class="pdf-link" href="readings/Reichenbach.pdf">Reichenbach, <em>The Philosophy of Space and Time</em> (selections)</a></li>
+          </ul></div>
+        </div></div>
+
+        <!-- WEEK 3 -->
+        <div class="week"><div class="week-header"><span class="week-num">Week 3</span><span class="week-title">Theory-Mediated Measurement</span><span class="week-toggle">&rsaquo;</span></div><div class="week-body">
+          <p class="description">The central methodological proposal: we avoid circularity through iterative, theory-mediated measurement. We examine how celestial mechanics exemplifies this approach.</p>
+          <div class="reading-group"><h4>Assigned</h4><ul>
+            <li><a class="pdf-link" href="readings/GES-Closing%20the%20Loop.pdf">Smith, &#8220;Closing the Loop&#8221;</a></li>
+          </ul></div>
+          <div class="reading-group"><h4>Optional</h4><ul>
+            <li><a class="pdf-link" href="readings/Smith%202002.pdf">Smith, &#8220;The Methodology of the <em>Principia</em>&#8221; (2002)</a></li>
+            <li><a class="pdf-link" href="readings/Kuhn%20(1962).pdf">Kuhn, &#8220;The Function of Measurement in Modern Physical Science&#8221;</a></li>
+          </ul></div>
+        </div></div>
+
+        <!-- WEEK 4 -->
+        <div class="week"><div class="week-header"><span class="week-num">Week 4</span><span class="week-title">Case Study &#8212; Molecular Reality</span><span class="week-toggle">&rsaquo;</span></div><div class="week-body">
+          <p class="description">How did convergent measurements of Avogadro&#8217;s number establish molecular reality? This case study illustrates the iterative, eliminative methodology.</p>
+          <div class="reading-group"><h4>Assigned</h4><ul>
+            <li><a class="pdf-link" href="readings/Smith%20and%20Seth%20(2020%2C%20Chapters%206-7).pdf">Smith &amp; Seth, <em>Brownian Motion and Molecular Reality</em>, Ch. 6&#8211;7</a> and <a class="pdf-link" href="readings/Smith%20and%20Seth%20(2020%2C%20Postscript).pdf">Postscript</a></li>
+            <li><a class="pdf-link" href="readings/Demopoulos%20(2022%2C%20Chapter%202).pdf">Demopoulos, <em>On Theories</em>, Chapter 2</a></li>
+            <li><a class="pdf-link" href="readings/van%20Fraassen%20(2009)%20Perils%20of%20Perrin.pdf">van Fraassen, &#8220;The Perils of Perrin&#8221;</a></li>
+          </ul></div>
+          <div class="reading-group"><h4>Optional</h4><ul>
+            <li><a class="pdf-link" href="readings/AchinsteinEvidenceforMolecules.pdf">Achinstein, &#8220;Was There Evidence for Atoms?&#8221;</a></li>
+            <li><a class="pdf-link" href="readings/CokoPerrin.pdf">Coko, &#8220;Jean Perrin and the Philosophers&#8217; Stories&#8221;</a></li>
+          </ul></div>
+        </div></div>
+
+        <!-- WEEK 5 -->
+        <div class="week"><div class="week-header"><span class="week-num">Week 5</span><span class="week-title">Data, Phenomena, and Measurement</span><span class="week-toggle">&rsaquo;</span></div><div class="week-body">
+          <p class="description">What do measurements establish? Bogen and Woodward&#8217;s distinction between data and phenomena helps clarify evidential reasoning: theories explain and predict phenomena, which are inferred from data but not directly observed.</p>
+          <div class="reading-group"><h4>Assigned</h4><ul>
+            <li><a class="pdf-link" href="readings/Bogen%20and%20Woodward%20(1988).pdf">Bogen &amp; Woodward, &#8220;Saving the Phenomena,&#8221; <em>Philosophical Review</em> (1988)</a></li>
+            <li><a class="pdf-link" href="readings/Woodward2011.pdf">Woodward, &#8220;Data and Phenomena: A Restatement and Defense,&#8221; <em>Synthese</em> (2011)</a></li>
+          </ul></div>
+          <div class="reading-group"><h4>Optional</h4><ul>
+            <li><a class="pdf-link" href="readings/Tal2011.pdf">Tal, &#8220;How Accurate is the Standard Second?&#8221;</a></li>
+            <li><a class="pdf-link" href="readings/Massimi2011.pdf">Massimi, &#8220;From Data to Phenomena&#8221;</a></li>
+          </ul></div>
+        </div></div>
+
+        <div class="part-header">Part II &middot; Effective Field Theories and the Structure of Theories</div>
+
+        <!-- WEEK 6 -->
+        <div class="week"><div class="week-header"><span class="week-num">Week 6</span><span class="week-title">Physics Avoidance and Scales</span><span class="week-toggle">&rsaquo;</span></div><div class="week-body">
+          <p class="description">Philosophers often take the content of a theory to be specified by a set of possible worlds. We consider Wilson&#8217;s critique, which emphasizes how terms shift meaning across contexts and scales, and why the &#8220;possible worlds&#8221; approach systematically misdescribes how theories work.</p>
+          <div class="reading-group"><h4>Assigned</h4><ul>
+            <li><a class="pdf-link" href="readings/WilsonPhysicsAvoidanceChapter2.pdf">Wilson, <em>Physics Avoidance</em>, Chapter 2 (&#8220;The Greediness of Scales&#8221;)</a></li>
+          </ul></div>
+          <div class="reading-group"><h4>Optional</h4><ul>
+            <li><a class="pdf-link" href="readings/FraserWilsonReview.pdf">Fraser, review of <em>Physics Avoidance</em>, <em>Philosophy of Science</em> (2021)</a></li>
+            <li>Ryckman, review in <em>NDPR</em></li>
+          </ul></div>
+        </div></div>
+
+        <!-- WEEK 7 -->
+        <div class="week"><div class="week-header"><span class="week-num">Week 7</span><span class="week-title">Introducing Effective Field Theories</span><span class="week-toggle">&rsaquo;</span></div><div class="week-body">
+          <p class="description">The EFT framework has transformed how physicists understand the scope and validity of theories. We introduce renormalization, decoupling, and domain-restricted validity at a conceptual level.</p>
+          <div class="reading-group"><h4>Assigned</h4><ul>
+            <li><a class="pdf-link" href="readings/Wells%20-%20Effective%20Theories%20in%20Physics.pdf">Wells, <em>Effective Theories in Physics</em>, Chapters 1&#8211;2</a></li>
+            <li><a class="pdf-link" href="readings/Hartmann%20-%20Effective%20Field%20Theories%2C%20Reductionism%20and%20Scientific%20Explanation.pdf">Hartmann, &#8220;Effective Field Theories, Reductionism, and Scientific Explanation&#8221;</a></li>
+          </ul></div>
+          <div class="reading-group"><h4>Optional</h4><ul>
+            <li><a class="pdf-link" href="readings/GeorgiEFT.pdf">Georgi, &#8220;Effective Field Theory&#8221;</a></li>
+            <li><a class="pdf-link" href="readings/Williams%2C%20Intro%20to%20RG%20Methods%20(Routledge).pdf">Williams, &#8220;Renormalization Group Methods: A Primer for Philosophers&#8221;</a></li>
+          </ul></div>
+        </div></div>
+
+        <!-- WEEK 8 -->
+        <div class="week"><div class="week-header"><span class="week-num">Week 8</span><span class="week-title">EFT and the Structure of Theories</span><span class="week-toggle">&rsaquo;</span></div><div class="week-body">
+          <p class="description">The EFT framework provides an account of theory structure and content that differs strikingly from standard philosophical views. We explore connections to Wilson&#8217;s critique, Ruetsche&#8217;s account of interpretation, and Williams&#8217;s effective realism.</p>
+          <div class="reading-group"><h4>Assigned</h4><ul>
+            <li>Wilson, TBD</li>
+            <li>Ruetsche, <em>Interpreting Quantum Theories</em>: <a class="pdf-link" href="readings/Laura%20Ruetsche%20-%20Interpreting%20Quantum%20Theories-Oxford%20University%20Press%20(2011)%20Chapter%201.pdf">&sect;1.1&#8211;1.5</a>, <a class="pdf-link" href="readings/Laura%20Ruetsche%20-%20Interpreting%20Quantum%20Theories-Oxford%20University%20Press%20(2011)%20Chapter%20%2015.pdf">&sect;15.1&#8211;15.2, 15.5&#8211;6</a></li>
+            <li><a class="pdf-link" href="readings/Williams%20-%20Scientific%20Realism%20Made%20Effective.pdf">Williams, &#8220;Scientific Realism Made Effective&#8221;</a></li>
+          </ul></div>
+        </div></div>
+
+        <!-- WEEK 9 -->
+        <div class="week"><div class="week-header"><span class="week-num">Week 9</span><span class="week-title">EFT, Measurement, and Scale</span><span class="week-toggle">&rsaquo;</span></div><div class="week-body">
+          <p class="description">What do measurements probe in the EFT picture? Quantities at accessible scales, not &#8220;fundamental&#8221; quantities. We explore how Wilson&#8217;s semantic point&#8212;that terms refer differently at different scales&#8212;connects to the EFT framework and to measurement.</p>
+          <div class="reading-group"><h4>Assigned</h4><ul>
+            <li><a class="pdf-link" href="readings/WilsonSemanticMimicry.pdf">Wilson, <em>Physics Avoidance</em>, Chapter 3 (&#8220;Semantic Mimicry&#8221;)</a></li>
+            <li><a class="pdf-link" href="readings/Williams%20-%20Naturalness%2C%20the%20autonomy%20of%20scales%2C%20and%20the%20125%20GeV%20Higgs.pdf">Williams, &#8220;Naturalness, the Autonomy of Scales, and the 125 GeV Higgs&#8221;</a></li>
+          </ul></div>
+          <div class="reading-group"><h4>Optional</h4><ul>
+            <li><a class="pdf-link" href="readings/WilsonImitationsofRigor8.pdf">Wilson, <em>Imitation of Rigor</em> (selections)</a></li>
+            <li><a class="pdf-link" href="readings/Ruetsche_Perils_Approximate_Ontology.pdf">Ruetsche, &#8220;Perils of Approximate Ontology&#8221;</a></li>
+          </ul></div>
+        </div></div>
+
+        <!-- WEEK 10 -->
+        <div class="week"><div class="week-header"><span class="week-num">Week 10</span><span class="week-title">Effective Realism and Its Critics</span><span class="week-toggle">&rsaquo;</span></div><div class="week-body">
+          <p class="description">Can we be realists about EFT-based physics without interpreting theories in the traditional sense? We examine effective realism and Ruetsche&#8217;s empiricist challenge. What epistemic stance does the measurement-centered, EFT-informed view support?</p>
+          <div class="reading-group"><h4>Assigned</h4><ul>
+            <li><a class="pdf-link" href="readings/ruetsche%20ascent%20pessimism.pdf">Ruetsche, &#8220;Renormalization Group Realism: The Ascent of Pessimism&#8221;</a></li>
+            <li><a class="pdf-link" href="readings/ruetsche%20perturbing%20realism.pdf">Ruetsche, &#8220;Perturbing Realism&#8221;</a></li>
+            <li><a class="pdf-link" href="readings/Woodward%20reaism%209.2.24%20(2).docx">Woodward, &#8220;Explanation, Truth and Structural Realism&#8221;</a> <span class="no-file">(.docx)</span></li>
+          </ul></div>
+          <div class="reading-group"><h4>Optional</h4><ul>
+            <li><a class="pdf-link" href="readings/Fraser_renormalization_and_the_formulation_of_scientific_realism.pdf">Fraser, &#8220;Renormalization and the Formulation of Scientific Realism&#8221;</a></li>
+            <li><a class="pdf-link" href="readings/Ruetsche_Perils_Approximate_Ontology.pdf">Ruetsche, &#8220;The Perils of Approximate Ontology&#8221;</a></li>
+            <li><a class="pdf-link" href="readings/SaatsiIneffectiveRealism.pdf">Saatsi, &#8220;(In)Effective Realism?&#8221;</a></li>
+            <li><a class="pdf-link" href="readings/Miller_worldly_imprecision.pdf">Miller, &#8220;Worldly Imprecision&#8221;</a></li>
+          </ul></div>
+        </div></div>
+      </section>
+
+      <!-- ═══ READING LIST (A-Z) ═══ -->
+      <section id="archive" class="tab-content">
+        <div class="archive-intro">Complete reading list, alphabetical by author.</div>
+        <ul class="archive-list">
+          <li><span class="au">Achinstein, P.</span> &#8212; <a href="readings/AchinsteinEvidenceforMolecules.pdf">&#8220;Was There Evidence for Atoms?&#8221;</a></li>
+          <li><span class="au">Ariew, R. &amp; Barker, P.</span> &#8212; <a href="readings/AriewBarkeronDuhem.pdf">Introduction to <em>Essays in History and Philosophy of Science</em></a></li>
+          <li><span class="au">Bogen, J. &amp; Woodward, J.</span> &#8212; <a href="readings/Bogen%20and%20Woodward%20(1988).pdf">&#8220;Saving the Phenomena&#8221; (1988)</a></li>
+          <li><span class="au">Chang, H.</span> &#8212; <a href="readings/Chang%20(2004%2C%20Chapter%205).pdf"><em>Inventing Temperature</em>, Ch. 5</a></li>
+          <li><span class="au">Coko, K.</span> &#8212; <a href="readings/CokoPerrin.pdf">&#8220;Jean Perrin and the Philosophers&#8217; Stories&#8221;</a></li>
+          <li><span class="au">Demopoulos, W.</span> &#8212; <a href="readings/Demopoulos%20(2022%2C%20Chapter%202).pdf"><em>On Theories</em>, Ch. 2 (2022)</a></li>
+          <li><span class="au">Duhem, P.</span> &#8212; <em>The Aim and Structure of Physical Theory</em></li>
+          <li><span class="au">Fraser, D.</span> &#8212; <a href="readings/FraserWilsonReview.pdf">Review of <em>Physics Avoidance</em> (2021)</a></li>
+          <li><span class="au">Fraser, D.</span> &#8212; <a href="readings/Fraser_renormalization_and_the_formulation_of_scientific_realism.pdf">&#8220;Renormalization and the Formulation of Scientific Realism&#8221;</a></li>
+          <li><span class="au">Georgi, H.</span> &#8212; <a href="readings/GeorgiEFT.pdf">&#8220;Effective Field Theory&#8221;</a></li>
+          <li><span class="au">Hartmann, S.</span> &#8212; <a href="readings/Hartmann%20-%20Effective%20Field%20Theories%2C%20Reductionism%20and%20Scientific%20Explanation.pdf">&#8220;Effective Field Theories, Reductionism, and Scientific Explanation&#8221;</a></li>
+          <li><span class="au">Kuhn, T.</span> &#8212; <a href="readings/Kuhn%20(1962).pdf">&#8220;The Function of Measurement in Modern Physical Science&#8221;</a></li>
+          <li><span class="au">Massimi, M.</span> &#8212; <a href="readings/Massimi2011.pdf">&#8220;From Data to Phenomena&#8221;</a></li>
+          <li><span class="au">Miller, M.</span> &#8212; <a href="readings/Miller_worldly_imprecision.pdf">&#8220;Worldly Imprecision&#8221;</a></li>
+          <li><span class="au">Poincar&eacute;, H.</span> &#8212; &#8220;The Measure of Time&#8221;</li>
+          <li><span class="au">Reichenbach, H.</span> &#8212; <a href="readings/Reichenbach.pdf"><em>Philosophy of Space and Time</em> (selections)</a></li>
+          <li><span class="au">Ruetsche, L.</span> &#8212; <em>Interpreting Quantum Theories</em>: <a href="readings/Laura%20Ruetsche%20-%20Interpreting%20Quantum%20Theories-Oxford%20University%20Press%20(2011)%20Chapter%201.pdf">Ch. 1</a>, <a href="readings/Laura%20Ruetsche%20-%20Interpreting%20Quantum%20Theories-Oxford%20University%20Press%20(2011)%20Chapter%20%2015.pdf">Ch. 15</a></li>
+          <li><span class="au">Ruetsche, L.</span> &#8212; <a href="readings/Ruetsche_Perils_Approximate_Ontology.pdf">&#8220;The Perils of Approximate Ontology&#8221;</a></li>
+          <li><span class="au">Ruetsche, L.</span> &#8212; <a href="readings/ruetsche%20perturbing%20realism.pdf">&#8220;Perturbing Realism&#8221;</a></li>
+          <li><span class="au">Ruetsche, L.</span> &#8212; <a href="readings/ruetsche%20ascent%20pessimism.pdf">&#8220;Renormalization Group Realism: The Ascent of Pessimism&#8221;</a></li>
+          <li><span class="au">Saatsi, J.</span> &#8212; <a href="readings/SaatsiIneffectiveRealism.pdf">&#8220;(In)Effective Realism?&#8221;</a></li>
+          <li><span class="au">Smith, G.E.</span> &#8212; <a href="readings/GES-Closing%20the%20Loop.pdf">&#8220;Closing the Loop&#8221;</a></li>
+          <li><span class="au">Smith, G.E.</span> &#8212; <a href="readings/Smith%202002.pdf">&#8220;The Methodology of the <em>Principia</em>&#8221; (2002)</a></li>
+          <li><span class="au">Smith, G.E. &amp; Seth, R.</span> &#8212; <a href="readings/Smith%20and%20Seth%20(2020%2C%20Chapters%206-7).pdf"><em>Brownian Motion and Molecular Reality</em>, Ch. 6&#8211;7</a>; <a href="readings/Smith%20and%20Seth%20(2020%2C%20Postscript).pdf">Postscript</a></li>
+          <li><span class="au">Stump, D.</span> &#8212; <a href="readings/Stump2006.pdf">&#8220;Pierre Duhem&#8217;s Virtue Epistemology&#8221; (2006)</a></li>
+          <li><span class="au">Tal, E.</span> &#8212; <a href="readings/Tal2011.pdf">&#8220;How Accurate is the Standard Second?&#8221;</a></li>
+          <li><span class="au">van Fraassen, B.</span> &#8212; <a href="readings/van%20Fraassen%20(2010%2C%20Chapters%205-7).pdf"><em>Scientific Representation</em>, Ch. 5&#8211;7</a></li>
+          <li><span class="au">van Fraassen, B.</span> &#8212; <a href="readings/van%20Fraassen%20(2009)%20Perils%20of%20Perrin.pdf">&#8220;The Perils of Perrin&#8221; (2009)</a></li>
+          <li><span class="au">Wells, J.</span> &#8212; <a href="readings/Wells%20-%20Effective%20Theories%20in%20Physics.pdf"><em>Effective Theories in Physics</em></a></li>
+          <li><span class="au">Williams, P.</span> &#8212; <a href="readings/Williams%20-%20Naturalness%2C%20the%20autonomy%20of%20scales%2C%20and%20the%20125%20GeV%20Higgs.pdf">&#8220;Naturalness, the Autonomy of Scales, and the 125 GeV Higgs&#8221;</a></li>
+          <li><span class="au">Williams, P.</span> &#8212; <a href="readings/Williams%2C%20Intro%20to%20RG%20Methods%20(Routledge).pdf">&#8220;Renormalization Group Methods: A Primer for Philosophers&#8221;</a></li>
+          <li><span class="au">Williams, P.</span> &#8212; <a href="readings/Williams%20-%20Scientific%20Realism%20Made%20Effective.pdf">&#8220;Scientific Realism Made Effective&#8221;</a></li>
+          <li><span class="au">Wilson, M.</span> &#8212; <a href="readings/WilsonImitationsofRigor8.pdf"><em>Imitation of Rigor</em> (selections)</a></li>
+          <li><span class="au">Wilson, M.</span> &#8212; <a href="readings/WilsonPhysicsAvoidanceChapter2.pdf"><em>Physics Avoidance</em>, Ch. 2 (&#8220;The Greediness of Scales&#8221;)</a></li>
+          <li><span class="au">Wilson, M.</span> &#8212; <a href="readings/WilsonSemanticMimicry.pdf"><em>Physics Avoidance</em>, Ch. 3 (&#8220;Semantic Mimicry&#8221;)</a></li>
+          <li><span class="au">Woodward, J.</span> &#8212; <a href="readings/Woodward2011.pdf">&#8220;Data and Phenomena: A Restatement and Defense&#8221; (2011)</a></li>
+          <li><span class="au">Woodward, J.</span> &#8212; <a href="readings/Woodward%20reaism%209.2.24%20(2).docx">&#8220;Explanation, Truth and Structural Realism&#8221;</a> (.docx)</li>
+        </ul>
+      </section>
+
+      <!-- ═══ DISCUSSION ═══ -->
+      <section id="discussion" class="tab-content">
+        <div class="discussion-intro">
+          <strong>Weekly Reading Commentaries</strong><br>
+          Post your commentary (250&#8211;500 words) by 5:00 p.m. Monday each week. Select the week, enter your name, and post. You can reply to your peers&#8217; commentaries.
+        </div>
+        <div class="thread-selector" id="threadSelector">
+          <button class="thread-btn active" data-thread="general">General</button>
+          <button class="thread-btn" data-thread="week-1">Wk 1</button>
+          <button class="thread-btn" data-thread="week-2">Wk 2</button>
+          <button class="thread-btn" data-thread="week-3">Wk 3</button>
+          <button class="thread-btn" data-thread="week-4">Wk 4</button>
+          <button class="thread-btn" data-thread="week-5">Wk 5</button>
+          <button class="thread-btn" data-thread="week-6">Wk 6</button>
+          <button class="thread-btn" data-thread="week-7">Wk 7</button>
+          <button class="thread-btn" data-thread="week-8">Wk 8</button>
+          <button class="thread-btn" data-thread="week-9">Wk 9</button>
+          <button class="thread-btn" data-thread="week-10">Wk 10</button>
+        </div>
+        <div class="post-form">
+          <h3>New Post</h3>
+          <div class="form-row"><label for="postAuthor">Your Name</label><input type="text" id="postAuthor" placeholder="e.g. Jane Smith"></div>
+          <div class="form-row"><label for="postBody">Commentary</label><textarea id="postBody" placeholder="Write your commentary on this week's readings..."></textarea></div>
+          <button class="post-submit" id="postSubmit">Post Commentary</button>
+        </div>
+        <div class="posts-container">
+          <div class="posts-header" id="postsHeader">General Discussion</div>
+          <div id="postsList"><div class="no-posts" style="line-height:1.7"><strong>Discussion board not yet configured.</strong><br>See the setup instructions in the HTML source.</div></div>
+        </div>
+        <div id="dbError" class="db-error" style="display:none"></div>
+      </section>
+
+    </main>
+    <footer>Phil 233: Empiricism and the Philosophy of Physics &middot; UCLA Philosophy &middot; Spring 2026</footer>
+  </div>
+
+  <!--
+  ================================================================
+  FIREBASE SETUP (one-time, ~5 minutes)
+
+  1. Go to https://console.firebase.google.com
+     Sign in with any Google account.
+     Click "Create a project." Name it anything (e.g. "phil233").
+     You can disable Google Analytics. Click Create.
+
+  2. Once ready, click the web icon (</>) to "Add a web app."
+     Give it a nickname. Click Register.
+     You'll see a firebaseConfig object. Copy the six values
+     (apiKey, authDomain, projectId, storageBucket,
+     messagingSenderId, appId) into SITE_CONFIG below.
+
+  3. Left sidebar: Build > Firestore Database > Create database
+     > Start in TEST MODE > pick a region > Enable.
+
+  4. In the Firestore "Rules" tab, replace everything with:
+
+       rules_version = '2';
+       service cloud.firestore {
+         match /databases/{database}/documents {
+           match /posts/{postId} {
+             allow read, write: if true;
+           }
+           match /posts/{postId}/replies/{replyId} {
+             allow read, write: if true;
+           }
+         }
+       }
+
+     Click Publish. Done!
+  ================================================================
+  -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script>
+  const SITE_CONFIG={
+    password:"phil233",
+    firebase:{apiKey:"",authDomain:"",projectId:"",storageBucket:"",messagingSenderId:"",appId:""}
+  };
+  const gate=document.getElementById('password-gate'),content=document.getElementById('site-content'),gatePass=document.getElementById('gate-password'),gateBtn=document.getElementById('gate-submit'),gateErr=document.getElementById('gate-error');
+  if(sessionStorage.getItem('phil233_auth')==='true'){gate.classList.add('hidden');content.classList.remove('locked');}
+  function attemptLogin(){if(gatePass.value===SITE_CONFIG.password){sessionStorage.setItem('phil233_auth','true');gate.classList.add('hidden');content.classList.remove('locked');}else{gateErr.textContent='Incorrect password.';gatePass.value='';gatePass.focus();}}
+  gateBtn.addEventListener('click',attemptLogin);gatePass.addEventListener('keydown',e=>{if(e.key==='Enter')attemptLogin();});
+  document.querySelectorAll('nav button').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.tab).classList.add('active');});});
+  document.querySelectorAll('.week-header').forEach(h=>{h.addEventListener('click',()=>{h.parentElement.classList.toggle('open');});});
+  let db=null,currentThread='general';const dbErrorEl=document.getElementById('dbError');
+  const threadNames={'general':'General Discussion','week-1':'Week 1 \u2014 Duhem','week-2':'Week 2 \u2014 Coordination','week-3':'Week 3 \u2014 Theory-Mediated Measurement','week-4':'Week 4 \u2014 Molecular Reality','week-5':'Week 5 \u2014 Data and Phenomena','week-6':'Week 6 \u2014 Physics Avoidance','week-7':'Week 7 \u2014 Introducing EFTs','week-8':'Week 8 \u2014 EFT and Theory Structure','week-9':'Week 9 \u2014 EFT, Measurement, Scale','week-10':'Week 10 \u2014 Effective Realism'};
+  if(SITE_CONFIG.firebase.apiKey){try{firebase.initializeApp(SITE_CONFIG.firebase);db=firebase.firestore();}catch(e){showDbError('Firebase init failed.');}}
+  if(db){document.getElementById('postsList').innerHTML='<div class="no-posts">No posts yet. Be the first!</div>';loadPosts();}
+  function showDbError(m){dbErrorEl.style.display='block';dbErrorEl.textContent=m;}
+  function esc(s){const e=document.createElement('span');e.textContent=s;return e.innerHTML;}
+  document.querySelectorAll('.thread-btn').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.thread-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');currentThread=b.dataset.thread;document.getElementById('postsHeader').textContent=threadNames[currentThread]||currentThread;if(db)loadPosts();});});
+  const authorInput=document.getElementById('postAuthor');const saved=localStorage.getItem('phil233_name');if(saved)authorInput.value=saved;authorInput.addEventListener('change',()=>{localStorage.setItem('phil233_name',authorInput.value);});
+  document.getElementById('postSubmit').addEventListener('click',async()=>{if(!db)return;const a=authorInput.value.trim(),b=document.getElementById('postBody').value.trim();if(!a){alert('Please enter your name.');return;}if(!b){alert('Please write your commentary.');return;}const btn=document.getElementById('postSubmit');btn.disabled=true;btn.textContent='Posting\u2026';try{await db.collection('posts').add({thread:currentThread,author:a,body:b,timestamp:firebase.firestore.FieldValue.serverTimestamp()});document.getElementById('postBody').value='';loadPosts();}catch(e){showDbError('Failed to post.');}finally{btn.disabled=false;btn.textContent='Post Commentary';}});
+  async function loadPosts(){if(!db)return;const c=document.getElementById('postsList');c.innerHTML='<div class="no-posts" style="color:var(--muted)">Loading\u2026</div>';try{const snap=await db.collection('posts').where('thread','==',currentThread).orderBy('timestamp','desc').get();if(snap.empty){c.innerHTML='<div class="no-posts">No posts yet for this thread.</div>';return;}let h='';for(const doc of snap.docs){const d=doc.data();const dt=d.timestamp?d.timestamp.toDate().toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'';const rs=await db.collection('posts').doc(doc.id).collection('replies').orderBy('timestamp','asc').get();let rh='';if(!rs.empty){rh='<div class="post-replies">';rs.forEach(r=>{const rd=r.data();const rdt=rd.timestamp?rd.timestamp.toDate().toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'';rh+='<div class="reply"><div class="post-meta"><span class="post-author">'+esc(rd.author)+'</span><span class="post-date">'+rdt+'</span></div><div class="post-body">'+esc(rd.body)+'</div></div>';});rh+='</div>';}h+='<div class="post" data-id="'+doc.id+'"><div class="post-meta"><span class="post-author">'+esc(d.author)+'</span><span class="post-date">'+dt+'</span></div><div class="post-body">'+esc(d.body)+'</div><button class="post-reply-btn" onclick="showReply(\''+doc.id+'\')">Reply</button>'+rh+'<div class="reply-form" id="rf-'+doc.id+'" style="display:none"><textarea id="rb-'+doc.id+'" placeholder="Write a reply\u2026"></textarea><button class="reply-submit" onclick="submitReply(\''+doc.id+'\')">Reply</button> <button class="reply-cancel" onclick="hideReply(\''+doc.id+'\')">Cancel</button></div></div>';}c.innerHTML=h;}catch(e){c.innerHTML='<div class="no-posts">Could not load posts. Check Firebase config.</div>';}}
+  function showReply(id){document.getElementById('rf-'+id).style.display='block';}
+  function hideReply(id){document.getElementById('rf-'+id).style.display='none';}
+  async function submitReply(id){if(!db)return;const a=authorInput.value.trim(),b=document.getElementById('rb-'+id).value.trim();if(!a){alert('Enter your name above.');return;}if(!b){alert('Write a reply.');return;}try{await db.collection('posts').doc(id).collection('replies').add({author:a,body:b,timestamp:firebase.firestore.FieldValue.serverTimestamp()});loadPosts();}catch(e){showDbError('Reply failed.');}}
+  </script>
+</body>
+</html>
