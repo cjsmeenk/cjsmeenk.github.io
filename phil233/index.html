@@ -427,7 +427,7 @@
   document.querySelectorAll('.week-header').forEach(h=>{h.addEventListener('click',()=>{h.parentElement.classList.toggle('open');});});
   let db=null,currentThread='general';const dbErrorEl=document.getElementById('dbError');
   const threadNames={'general':'General Discussion','week-1':'Week 1 \u2014 Duhem','week-2':'Week 2 \u2014 Coordination','week-3':'Week 3 \u2014 Theory-Mediated Measurement','week-4':'Week 4 \u2014 Molecular Reality','week-5':'Week 5 \u2014 Data and Phenomena','week-6':'Week 6 \u2014 Physics Avoidance','week-7':'Week 7 \u2014 Introducing EFTs','week-8':'Week 8 \u2014 EFT and Theory Structure','week-9':'Week 9 \u2014 EFT, Measurement, Scale','week-10':'Week 10 \u2014 Effective Realism'};
-  if(SITE_CONFIG.firebase.apiKey){try{firebase.initializeApp(SITE_CONFIG.firebase);db=firebase.firestore();}catch(e){showDbError('Firebase init failed.');}}
+  if(SITE_CONFIG.firebase.apiKey){try{firebase.initializeApp(SITE_CONFIG.firebase);db=firebase.firestore();db.settings({experimentalForceLongPolling:true});}catch(e){showDbError('Firebase init failed.');}}
   if(db){document.getElementById('postsList').innerHTML='<div class="no-posts">No posts yet. Be the first!</div>';loadPosts();}
   function showDbError(m){dbErrorEl.style.display='block';dbErrorEl.textContent=m;}
   function esc(s){const e=document.createElement('span');e.textContent=s;return e.innerHTML;}
