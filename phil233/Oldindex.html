@@ -104,16 +104,6 @@
     .reply-cancel{font-family:'Source Sans 3',sans-serif;font-size:.82rem;padding:.4rem .75rem;background:none;color:var(--muted);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer}
     .no-posts{padding:2.5rem 1.25rem;text-align:center;color:var(--muted);font-size:.95rem}
     .db-error{padding:1.5rem;text-align:center;color:#b91c1c;font-size:.9rem;background:#fef2f2;border-radius:var(--radius);margin-bottom:1rem}
-    .handouts-intro{font-size:.95rem;color:var(--muted);margin-bottom:1.25rem;padding:.75rem 1rem;background:var(--accent-light);border-radius:var(--radius);border-left:3px solid var(--accent)}
-    .handout-list{list-style:none;background:#fff;border:1px solid var(--border);border-radius:var(--radius)}
-    .handout-list li{display:flex;align-items:center;gap:.75rem;padding:.7rem 1.25rem;border-bottom:1px solid var(--border);font-size:.93rem}
-    .handout-list li:last-child{border-bottom:none}
-    .handout-list li a{color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent);flex:1}
-    .handout-list li a:hover{border-bottom-style:solid}
-    .handout-list .file-size{font-size:.8rem;color:var(--muted);white-space:nowrap}
-    .handout-list .file-icon{font-size:1.1rem;flex-shrink:0}
-    .handout-loading{text-align:center;padding:2rem;color:var(--muted)}
-    .handout-empty{text-align:center;padding:2.5rem;color:var(--muted);font-size:.95rem}
     footer{text-align:center;padding:2rem;font-size:.85rem;color:var(--muted);border-top:1px solid var(--border);margin-top:3rem}
     @media(max-width:640px){header h1{font-size:1.5rem}nav button{padding:.7rem 1rem;font-size:.88rem}main{padding:1.25rem}.thread-selector{gap:.35rem}.thread-btn{font-size:.75rem;padding:.3rem .6rem}}
   </style>
@@ -154,7 +144,6 @@
       <button data-tab="schedule">Schedule &amp; Readings</button>
       <button data-tab="archive">Reading List</button>
       <button data-tab="discussion">Discussion</button>
-      <button data-tab="handouts">Handouts</button>
     </div></nav>
 
     <main>
@@ -384,12 +373,6 @@
         <div id="dbError" class="db-error" style="display:none"></div>
       </section>
 
-      <!-- ═══ HANDOUTS ═══ -->
-      <section id="handouts" class="tab-content">
-        <div class="handouts-intro">Class handouts and supplementary materials. New files appear here automatically.</div>
-        <div id="handoutContent"><div class="handout-loading">Loading handouts&#8230;</div></div>
-      </section>
-
     </main>
     <footer>Phil 233: Empiricism and the Philosophy of Physics &middot; UCLA Philosophy &middot; Spring 2026</footer>
   </div>
@@ -434,8 +417,7 @@
   <script>
   const SITE_CONFIG={
     password:"GoBruins!",
-    firebase:{apiKey:"",authDomain:"",projectId:"",storageBucket:"",messagingSenderId:"",appId:""},
-    github:{owner:"cjsmeenk",repo:"cjsmeenk.github.io",path:"phil233/handouts"}
+    firebase:{apiKey:"AIzaSyAfd1YGuBY6v-WQdwp32Nvwz7SS6xui4Sw",authDomain:"phil233-26ead.firebaseapp.com",projectId:"phil233-26ead",storageBucket:"phil233-26ead.firebasestorage.app",messagingSenderId:"615245238347",appId:"1:615245238347:web:238076be0eaec36ec3bdce"}
   };
   const gate=document.getElementById('password-gate'),content=document.getElementById('site-content'),gatePass=document.getElementById('gate-password'),gateBtn=document.getElementById('gate-submit'),gateErr=document.getElementById('gate-error');
   if(sessionStorage.getItem('phil233_auth')==='true'){gate.classList.add('hidden');content.classList.remove('locked');}
@@ -456,46 +438,6 @@
   function showReply(id){document.getElementById('rf-'+id).style.display='block';}
   function hideReply(id){document.getElementById('rf-'+id).style.display='none';}
   async function submitReply(id){if(!db)return;const a=authorInput.value.trim(),b=document.getElementById('rb-'+id).value.trim();if(!a){alert('Enter your name above.');return;}if(!b){alert('Write a reply.');return;}try{await db.collection('posts').doc(id).collection('replies').add({author:a,body:b,timestamp:firebase.firestore.FieldValue.serverTimestamp()});loadPosts();}catch(e){showDbError('Reply failed.');}}
-
-  // HANDOUTS — auto-list from GitHub
-  async function loadHandouts(){
-    const el=document.getElementById('handoutContent');
-    const g=SITE_CONFIG.github;
-    const cacheKey='phil233_handouts';
-    const cacheTime='phil233_handouts_t';
-    // Use cached data if less than 5 minutes old (avoids GitHub API rate limits)
-    const cached=sessionStorage.getItem(cacheKey);
-    const cachedAt=parseInt(sessionStorage.getItem(cacheTime)||'0');
-    if(cached&&(Date.now()-cachedAt<300000)){renderHandouts(JSON.parse(cached),el);return;}
-    try{
-      const r=await fetch('https://api.github.com/repos/'+g.owner+'/'+g.repo+'/contents/'+g.path);
-      if(r.status===404){el.innerHTML='<div class="handout-empty">No handouts posted yet.</div>';return;}
-      if(!r.ok)throw new Error(r.status);
-      const files=await r.json();
-      sessionStorage.setItem(cacheKey,JSON.stringify(files));
-      sessionStorage.setItem(cacheTime,String(Date.now()));
-      renderHandouts(files,el);
-    }catch(e){
-      el.innerHTML='<div class="handout-empty">Could not load handouts.</div>';
-    }
-  }
-  function renderHandouts(files,el){
-    // Filter to actual files (not directories or .gitkeep)
-    const docs=files.filter(f=>f.type==='file'&&f.name!=='.gitkeep').sort((a,b)=>a.name.localeCompare(b.name));
-    if(docs.length===0){el.innerHTML='<div class="handout-empty">No handouts posted yet.</div>';return;}
-    let h='<ul class="handout-list">';
-    docs.forEach(f=>{
-      const ext=f.name.split('.').pop().toLowerCase();
-      const icon=ext==='pdf'?'\u{1F4C4}':ext==='docx'?'\u{1F4DD}':'\u{1F4CE}';
-      const size=f.size>1048576?(f.size/1048576).toFixed(1)+' MB':(f.size/1024).toFixed(0)+' KB';
-      // Clean up display name: remove extension, replace underscores/hyphens with spaces
-      const displayName=f.name.replace(/\.[^.]+$/,'').replace(/[_-]/g,' ');
-      h+='<li><span class="file-icon">'+icon+'</span><a href="handouts/'+encodeURIComponent(f.name)+'">'+displayName+'</a><span class="file-size">'+size+'</span></li>';
-    });
-    h+='</ul>';
-    el.innerHTML=h;
-  }
-  loadHandouts();
   </script>
 </body>
 </html>
