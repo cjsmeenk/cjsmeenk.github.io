@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Philosophy of Space and Time — UCLA Phil 130</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#1a1a1a;--paper:#faf8f4;--accent:#2c4a6e;--accent-light:#e8eef5;--muted:#6b6b6b;--border:#d4cfc6;--highlight:#c9a227;--sidebar-bg:#f0ece4;--shadow:rgba(0,0,0,0.06);--radius:4px}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--paper);color:var(--ink);line-height:1.65;font-size:16px}
+    #password-gate{position:fixed;inset:0;background:var(--accent);display:flex;align-items:center;justify-content:center;z-index:9999}
+    #password-gate.hidden{display:none}
+    .gate-box{background:#fff;border-radius:6px;padding:2.5rem 2.5rem 2rem;max-width:420px;width:90%;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.25)}
+    .gate-box .dept-label{font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:.4rem}
+    .gate-box h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.45rem;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:.25rem}
+    .gate-box .gate-subtitle{font-family:'Cormorant Garamond',Georgia,serif;font-size:1rem;font-style:italic;color:var(--muted);margin-bottom:1.5rem}
+    .gate-box p{font-size:.9rem;color:var(--muted);margin-bottom:1rem}
+    .gate-input-row{display:flex;gap:.5rem}
+    .gate-input-row input{flex:1;font-family:'Source Sans 3',sans-serif;font-size:.95rem;padding:.65rem 1rem;border:1px solid var(--border);border-radius:var(--radius);outline:none}
+    .gate-input-row input:focus{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-light)}
+    .gate-input-row button{font-family:'Source Sans 3',sans-serif;font-size:.9rem;font-weight:600;padding:.65rem 1.25rem;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);cursor:pointer;white-space:nowrap}
+    .gate-input-row button:hover{opacity:.9}
+    .gate-error{font-size:.85rem;color:#b91c1c;margin-top:.6rem;min-height:1.2em}
+    #site-content.locked{display:none}
+    header{background:var(--accent);color:#fff;padding:2.5rem 2rem 2rem;border-bottom:4px solid var(--highlight)}
+    header .container{max-width:960px;margin:0 auto}
+    header .dept{font-size:.85rem;font-weight:300;letter-spacing:.15em;text-transform:uppercase;opacity:.8;margin-bottom:.5rem}
+    header h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:2rem;font-weight:600;line-height:1.25;margin-bottom:.3rem}
+    header .meta{font-size:.9rem;opacity:.8;line-height:1.7;margin-top:.75rem}
+    header .meta strong{font-weight:600;opacity:1}
+    nav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px var(--shadow)}
+    nav .container{max-width:960px;margin:0 auto;display:flex}
+    nav button{font-family:'Source Sans 3',sans-serif;font-size:.95rem;background:none;border:none;padding:.85rem 1.5rem;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent;transition:all .2s}
+    nav button:hover{color:var(--ink);background:var(--accent-light)}
+    nav button.active{color:var(--accent);font-weight:600;border-bottom-color:var(--accent)}
+    main{max-width:960px;margin:0 auto;padding:2rem}
+    .tab-content{display:none}.tab-content.active{display:block}
+
+    /* SYLLABUS */
+    .syllabus-section{margin-bottom:2rem}
+    .syllabus-section h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.25rem;font-weight:600;color:var(--accent);margin-bottom:.75rem;padding-bottom:.3rem;border-bottom:2px solid var(--accent)}
+    .syllabus-text{font-size:.95rem;color:#333;line-height:1.75;margin-bottom:1rem}
+    .syllabus-text em{color:var(--accent)}
+    .eval-list{list-style:none;padding:0}
+    .eval-list li{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:.9rem 1.25rem;margin-bottom:.5rem;font-size:.95rem;color:#444}
+    .eval-list li strong{color:var(--ink)}
+    .book-list{list-style:none;padding:0}
+    .book-list li{padding:.35rem 0 .35rem 1.1rem;position:relative;font-size:.95rem;color:#444}
+    .book-list li::before{content:'\2014';position:absolute;left:0;color:var(--muted)}
+
+    /* SCHEDULE TABLE */
+    .schedule-note{font-size:.9rem;color:var(--muted);margin-bottom:1rem;padding:.6rem 1rem;background:var(--accent-light);border-radius:var(--radius);border-left:3px solid var(--accent)}
+    .schedule-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;font-size:.93rem}
+    .schedule-table th{background:var(--accent);color:#fff;text-align:left;padding:.6rem 1rem;font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+    .schedule-table td{padding:.55rem 1rem;border-bottom:1px solid var(--border);color:#444;vertical-align:top}
+    .schedule-table tr:last-child td{border-bottom:none}
+    .schedule-table .part-row td{background:var(--sidebar-bg);font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:1rem;color:var(--accent);padding:.7rem 1rem}
+    .schedule-table .exam-row td{font-weight:600;color:var(--ink);background:#fef9e7}
+    .schedule-table td a{color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent)}
+    .schedule-table td a:hover{border-bottom-style:solid}
+
+    /* READINGS */
+    .reading-list{list-style:none;counter-reset:reading;background:#fff;border:1px solid var(--border);border-radius:var(--radius)}
+    .reading-list li{counter-increment:reading;padding:.75rem 1.25rem .75rem 3.5rem;border-bottom:1px solid var(--border);font-size:.95rem;color:#444;position:relative}
+    .reading-list li:last-child{border-bottom:none}
+    .reading-list li::before{content:'C ' counter(reading);position:absolute;left:1.25rem;top:.75rem;font-size:.75rem;font-weight:600;color:#fff;background:var(--accent);padding:.1rem .45rem;border-radius:3px}
+    .reading-list li a{color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent)}
+    .reading-list li a:hover{border-bottom-style:solid}
+    .further-reading{margin-top:2rem}
+    .further-reading h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.1rem;font-weight:600;color:var(--accent);margin-bottom:.5rem}
+    .further-list{list-style:none;padding:0}
+    .further-list li{padding:.3rem 0 .3rem 1.1rem;position:relative;font-size:.93rem;color:#555}
+    .further-list li::before{content:'\2014';position:absolute;left:0;color:var(--muted)}
+
+    /* AUTO-LISTED FILES (slides, assignments) */
+    .file-intro{font-size:.95rem;color:var(--muted);margin-bottom:1.25rem;padding:.75rem 1rem;background:var(--accent-light);border-radius:var(--radius);border-left:3px solid var(--accent)}
+    .file-list{list-style:none;background:#fff;border:1px solid var(--border);border-radius:var(--radius)}
+    .file-list li{display:flex;align-items:center;gap:.75rem;padding:.7rem 1.25rem;border-bottom:1px solid var(--border);font-size:.93rem}
+    .file-list li:last-child{border-bottom:none}
+    .file-list li a{color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent);flex:1}
+    .file-list li a:hover{border-bottom-style:solid}
+    .file-list .file-size{font-size:.8rem;color:var(--muted);white-space:nowrap}
+    .file-list .file-icon{font-size:1.1rem;flex-shrink:0}
+    .file-loading{text-align:center;padding:2rem;color:var(--muted)}
+    .file-empty{text-align:center;padding:2.5rem;color:var(--muted);font-size:.95rem}
+
+    footer{text-align:center;padding:2rem;font-size:.85rem;color:var(--muted);border-top:1px solid var(--border);margin-top:3rem}
+    @media(max-width:640px){header h1{font-size:1.5rem}nav button{padding:.7rem 1rem;font-size:.88rem}main{padding:1.25rem}.schedule-table{font-size:.85rem}.schedule-table td,.schedule-table th{padding:.45rem .6rem}}
+  </style>
+</head>
+<body>
+  <div id="password-gate">
+    <div class="gate-box">
+      <div class="dept-label">UCLA Department of Philosophy &middot; Spring 2026</div>
+      <h2>Phil 130:  Philosophy of Space and Time</h2>
+      <p>Enter the course password to access the site.</p>
+      <div class="gate-input-row">
+        <input type="password" id="gate-password" placeholder="Password" autocomplete="off">
+        <button id="gate-submit">Enter</button>
+      </div>
+      <div class="gate-error" id="gate-error"></div>
+    </div>
+  </div>
+
+  <div id="site-content" class="locked">
+    <header>
+      <div class="container">
+        <div class="dept">UCLA Department of Philosophy &middot; Spring 2026</div>
+        <h1>Philosophy of Space and Time</h1>
+        <div class="meta">
+          <strong>Instructor:</strong> Chris Smeenk &nbsp;&middot;&nbsp;
+          <strong>Time:</strong> T Th 8:00&#8211;9:50 am &nbsp;&middot;&nbsp;
+          <strong>Location:</strong> Dodd 175<br>
+          <strong>Office:</strong> 358 Dodd Hall &nbsp;&middot;&nbsp;
+          <strong>Office Hours:</strong> Tu 11&#8211;12, W 1&#8211;2 &nbsp;&middot;&nbsp;
+          <strong>Email:</strong> chris.smeenk@gmail.com
+        </div>
+      </div>
+    </header>
+
+    <nav><div class="container">
+      <button class="active" data-tab="syllabus">Syllabus</button>
+      <button data-tab="schedule">Schedule</button>
+      <button data-tab="readings">Readings</button>
+      <button data-tab="slides">Slides</button>
+      <button data-tab="assignments">Assignments</button>
+    </div></nav>
+
+    <main>
+
+      <!-- ═══ SYLLABUS ═══ -->
+      <section id="syllabus" class="tab-content active">
+        <div class="syllabus-section">
+          <h2>Course Description</h2>
+          <p class="syllabus-text">In this course we will study the nature of space and time. We begin with foundational questions about motion and geometry: Zeno&#8217;s paradoxes challenge our understanding of continuous motion, while the development of non-Euclidean geometries in the 19th century raises deep questions about how we can know the geometrical structure of space. We then turn to disputes regarding the nature of space, time, and motion waged in the seventeenth century by the likes of Descartes, Newton, and Leibniz. We will study the debate between &#8220;absolute&#8221; and &#8220;relational&#8221; accounts of space and time. Relationalists treat space as consisting of nothing but the spatial relationships between objects, whereas proponents of &#8220;absolute&#8221; space assert that space exists as a substance in its own right. We next turn to Einstein&#8217;s special and general theories of relativity, the new conceptions of space and time they introduce, and how they transform the classical debates. The final part of the course turns to questions regarding the nature of time in contemporary physics.</p>
+        </div>
+
+        <div class="syllabus-section">
+          <h2>Evaluation</h2>
+          <ul class="eval-list">
+            <li><strong>Attendance &amp; Participation (10%)</strong></li>
+            <li><strong>Short Assignments (15%)</strong> &#8212; Questions regarding the reading assignments, roughly one page, distributed once a week (8 sets). No late assignments accepted, but the lowest score will be dropped.</li>
+            <li><strong>In-Class Exams (40%)</strong> &#8212; Two in-class exams, equally weighted (May 5 and May 28). You will write essays in response to questions distributed prior to the exam.</li>
+            <li><strong>Final Exam (35%)</strong> &#8212; Cumulative, including short answer questions and essays. June 11, 3&#8211;6 pm.</li>
+          </ul>
+        </div>
+
+        <div class="syllabus-section">
+          <h2>Required Texts</h2>
+          <ul class="book-list">
+            <li>Maudlin, <em>Philosophy of Physics: Space and Time</em> (Princeton UP) [= M]</li>
+            <li>Geroch, <em>General Relativity from A to B</em> (Chicago UP) [= G]</li>
+            <li>Rovelli, <em>The Order of Time</em> (Riverhead Books) [= R]</li>
+            <li>Online readings posted on the Readings tab [= C]</li>
+          </ul>
+        </div>
+
+        <div class="syllabus-section">
+          <h2>Key Dates</h2>
+          <ul class="eval-list">
+            <li><strong>May 5</strong> &#8212; First Exam</li>
+            <li><strong>May 28</strong> &#8212; Second Exam</li>
+            <li><strong>June 11, 3&#8211;6 pm</strong> &#8212; Final Exam</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ═══ SCHEDULE ═══ -->
+      <section id="schedule" class="tab-content">
+        <div class="schedule-note"><strong>Key:</strong> C = online articles (see Readings tab); G = Geroch; M = Maudlin; R = Rovelli. Numbers refer to chapters.</div>
+        <table class="schedule-table">
+          <thead><tr><th>Date</th><th>Topic</th><th>Reading</th></tr></thead>
+          <tbody>
+            <tr><td>Mar 31</td><td>Introduction and Overview</td><td></td></tr>
+            <tr class="part-row"><td colspan="3">Geometry and Motion</td></tr>
+            <tr><td>Apr 2</td><td>Zeno&#8217;s Paradoxes</td><td>C 1</td></tr>
+            <tr><td>Apr 7</td><td>Euclidean and Non-Euclidean Geometry</td><td>C 2</td></tr>
+            <tr><td>Apr 9</td><td>Conceptions of Geometry</td><td>C 3</td></tr>
+            <tr class="part-row"><td colspan="3">17th Century: New Science of Motion</td></tr>
+            <tr><td>Apr 14</td><td>Newton and Absolute Space</td><td>C 4; M 1</td></tr>
+            <tr><td>Apr 16</td><td><em>continued</em></td><td>C 5; M 2; G 1&#8211;2</td></tr>
+            <tr><td>Apr 21</td><td>Relationalism and Relativity</td><td>M 3</td></tr>
+            <tr><td>Apr 23</td><td><em>continued</em></td><td>M 3; G 3&#8211;4</td></tr>
+            <tr class="part-row"><td colspan="3">Modern Spacetime Theories</td></tr>
+            <tr><td>Apr 28</td><td>Introduction to Spacetime</td><td>G 5&#8211;6</td></tr>
+            <tr><td>Apr 30</td><td>Special Relativity</td><td>M 4</td></tr>
+            <tr class="exam-row"><td>May 5</td><td>First Exam</td><td></td></tr>
+            <tr><td>May 7</td><td><em>continued</em></td><td>M 4; G 5</td></tr>
+            <tr><td>May 12</td><td>Measurement</td><td>M 5; G 5&#8211;6</td></tr>
+            <tr><td>May 14</td><td>General Relativity</td><td>M 6; G 7&#8211;8</td></tr>
+            <tr><td>May 19</td><td><em>continued</em></td><td></td></tr>
+            <tr><td>May 21</td><td><em>continued</em></td><td></td></tr>
+            <tr class="part-row"><td colspan="3">It&#8217;s About Time</td></tr>
+            <tr><td>May 26</td><td>The Order of Time</td><td>R 1&#8211;4; M 7</td></tr>
+            <tr class="exam-row"><td>May 28</td><td>Second Exam</td><td></td></tr>
+            <tr><td>Jun 2</td><td><em>continued</em></td><td>R 6&#8211;8</td></tr>
+            <tr><td>Jun 4</td><td><em>continued</em></td><td>R 9&#8211;11</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ═══ READINGS ═══ -->
+      <section id="readings" class="tab-content">
+        <div class="syllabus-section">
+          <h2>Articles Posted Online</h2>
+          <ol class="reading-list">
+            <li><a href="readings/Huggett3.pdf">Huggett, <em>Space from Zeno to Einstein</em>, Chapter 3, pp. 29&#8211;52</a></li>
+            <li><a href="readings/Norton.pdf">Norton, &#8220;Philosophy of Space and Time,&#8221; in <em>Introduction to the Philosophy of Science</em> (Salmon et al.), pp. 179&#8211;231</a></li>
+            <li><a href="readings/Huggett13.pdf">Huggett, <em>Space from Zeno to Einstein</em>, Chapter 13, pp. 235&#8211;252</a></li>
+            <li>Newton on space and time: <a href="readings/NewtonDeG.pdf">selections from &#8220;De Gravitatione&#8221;</a> and <a href="readings/NewtonPrincipia.pdf">Scholium to the Definitions, <em>Principia</em> (Cohen &amp; Whitman, pp. 408&#8211;415)</a></li>
+            <li><a href="readings/DiSalleNewton.pdf">DiSalle, &#8220;Newton&#8217;s Philosophical Analysis of Space and Time,&#8221; in the <em>Cambridge Companion to Newton</em></a></li>
+          </ol>
+        </div>
+
+        <div class="further-reading">
+          <h3>Accessible Introductions</h3>
+          <ul class="further-list">
+            <li>Dainton, <em>Time and Space</em></li>
+            <li>Huggett, <em>Space from Zeno to Einstein</em></li>
+            <li>Huggett, <em>Everywhere and Everywhen</em></li>
+          </ul>
+        </div>
+
+        <div class="further-reading">
+          <h3>Classic Works in Philosophy of Space and Time</h3>
+          <ul class="further-list">
+            <li>Brown, <em>Physical Relativity</em></li>
+            <li>Earman, <em>World Enough and Spacetime</em></li>
+            <li>Friedman, <em>Foundations of Spacetime Theories</em></li>
+            <li>Reichenbach, <em>Philosophy of Space and Time</em></li>
+            <li>Sklar, <em>Space, Time, and Spacetime</em></li>
+            <li>Torretti, <em>Relativity and Geometry</em></li>
+          </ul>
+          <p class="syllabus-text" style="margin-top:.75rem">There are also a number of excellent entries on relevant topics in the <a href="https://plato.stanford.edu" style="color:var(--accent)">Stanford Encyclopedia of Philosophy</a>.</p>
+        </div>
+      </section>
+
+      <!-- ═══ SLIDES ═══ -->
+      <section id="slides" class="tab-content">
+        <div class="file-intro">Lecture slides are posted here after each class.</div>
+        <div id="slidesContent"><div class="file-loading">Loading&#8230;</div></div>
+      </section>
+
+      <!-- ═══ ASSIGNMENTS ═══ -->
+      <section id="assignments" class="tab-content">
+        <div class="file-intro">Weekly reading questions and other assignments. No late assignments accepted; the lowest score will be dropped.</div>
+        <div id="assignmentsContent"><div class="file-loading">Loading&#8230;</div></div>
+      </section>
+
+    </main>
+    <footer>Phil 130: Philosophy of Space and Time &middot; UCLA Philosophy &middot; Spring 2026</footer>
+  </div>
+
+  <script>
+  // ============================================================
+  //  CONFIGURATION
+  // ============================================================
+  const SITE_CONFIG = {
+    password: "GoBruins!",
+    github: { owner: "cjsmeenk", repo: "cjsmeenk.github.io" }
+  };
+
+  // PASSWORD GATE
+  const gate=document.getElementById('password-gate'),content=document.getElementById('site-content'),gatePass=document.getElementById('gate-password'),gateBtn=document.getElementById('gate-submit'),gateErr=document.getElementById('gate-error');
+  if(sessionStorage.getItem('phil130_auth')==='true'){gate.classList.add('hidden');content.classList.remove('locked');}
+  function attemptLogin(){if(gatePass.value===SITE_CONFIG.password){sessionStorage.setItem('phil130_auth','true');gate.classList.add('hidden');content.classList.remove('locked');}else{gateErr.textContent='Incorrect password.';gatePass.value='';gatePass.focus();}}
+  gateBtn.addEventListener('click',attemptLogin);gatePass.addEventListener('keydown',e=>{if(e.key==='Enter')attemptLogin();});
+
+  // TABS
+  document.querySelectorAll('nav button').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.tab).classList.add('active');});});
+
+  // AUTO-LIST FILES FROM GITHUB
+  async function loadFiles(ghPath, elementId, emptyMsg) {
+    const el = document.getElementById(elementId);
+    const g = SITE_CONFIG.github;
+    const cacheKey = 'phil130_' + elementId;
+    const cacheTime = cacheKey + '_t';
+    const cached = sessionStorage.getItem(cacheKey);
+    const cachedAt = parseInt(sessionStorage.getItem(cacheTime) || '0');
+    if (cached && (Date.now() - cachedAt < 300000)) { renderFiles(JSON.parse(cached), el, ghPath, emptyMsg); return; }
+    try {
+      const r = await fetch('https://api.github.com/repos/' + g.owner + '/' + g.repo + '/contents/' + ghPath);
+      if (r.status === 404) { el.innerHTML = '<div class="file-empty">' + emptyMsg + '</div>'; return; }
+      if (!r.ok) throw new Error(r.status);
+      const files = await r.json();
+      sessionStorage.setItem(cacheKey, JSON.stringify(files));
+      sessionStorage.setItem(cacheTime, String(Date.now()));
+      renderFiles(files, el, ghPath, emptyMsg);
+    } catch (e) {
+      el.innerHTML = '<div class="file-empty">Could not load files.</div>';
+    }
+  }
+
+  function renderFiles(files, el, ghPath, emptyMsg) {
+    const docs = files.filter(f => f.type === 'file' && f.name !== '.gitkeep').sort((a, b) => a.name.localeCompare(b.name));
+    if (docs.length === 0) { el.innerHTML = '<div class="file-empty">' + emptyMsg + '</div>'; return; }
+    // Build path relative to index.html
+    const relPath = ghPath.replace('phil130/', '');
+    let h = '<ul class="file-list">';
+    docs.forEach(f => {
+      const ext = f.name.split('.').pop().toLowerCase();
+      const icon = ext === 'pdf' ? '\u{1F4C4}' : ext === 'pptx' || ext === 'ppt' ? '\u{1F4CA}' : ext === 'docx' || ext === 'doc' ? '\u{1F4DD}' : '\u{1F4CE}';
+      const size = f.size > 1048576 ? (f.size / 1048576).toFixed(1) + ' MB' : (f.size / 1024).toFixed(0) + ' KB';
+      const displayName = f.name.replace(/\.[^.]+$/, '').replace(/[_-]/g, ' ');
+      h += '<li><span class="file-icon">' + icon + '</span><a href="' + relPath + '/' + encodeURIComponent(f.name) + '">' + displayName + '</a><span class="file-size">' + size + '</span></li>';
+    });
+    h += '</ul>';
+    el.innerHTML = h;
+  }
+
+  loadFiles('phil130/slides', 'slidesContent', 'No slides posted yet.');
+  loadFiles('phil130/assignments', 'assignmentsContent', 'No assignments posted yet.');
+  </script>
+</body>
+</html>
